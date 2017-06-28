@@ -1,0 +1,39 @@
+body {
+    background: #666;
+}
+
+.welcome {
+    display: none;
+}
+
+.my_blog {
+    margin-top: 420px;
+    /*position: absolute;*/
+    /*top: 70%;*/
+    /*left: 50%;*/
+    /*margin: 0 auto;*/
+    font: 400 20px/40px '微软雅黑';
+    color: #FFF;
+    text-align: center;
+    padding: 8px;
+}
+
+.my_blog_title {
+    border-bottom: 1px solid #FFF;
+}
+
+.my_blog_text {
+    font: 400 16px/32px '微软雅黑';
+}
+
+.icon img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -130px 0 0 -100px;
+    border: 3px solid #FFF;
+}
+
