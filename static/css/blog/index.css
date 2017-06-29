@@ -16,23 +16,9 @@ body {
     margin: -120px 0 0 -250px;
 }
 
-.my_blog_title {
-    border: 1px solid #FFF;
-    width: 146px;
-    position: relative;
-    left: 50%;
-    margin: 10px 0 0 -77px;
-}
-
-.my_blog_title a {
+.my_blog  a {
     text-decoration: none;
     color: #FFF;
-}
-
-.my_blog_text {
-    border-top: 1px solid #FFF;
-    font: 400 16px/32px '微软雅黑';
-    margin: 20px 0 0 0;
 }
 
 .icon img {
@@ -41,4 +27,19 @@ body {
     border-radius: 50%;
     border: 3px solid #FFF;
 }
+
+.my_blog_title {
+    border: 1px solid #FFF;
+    width: 146px;
+    position: relative;
+    left: 50%;
+    margin: 10px 0 0 -77px;
+}
+
+.my_blog_text {
+    border-top: 1px solid #FFF;
+    font: 400 16px/32px '微软雅黑';
+    margin: 20px 0 0 0;
+}
+
 
