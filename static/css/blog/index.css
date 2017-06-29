@@ -1,11 +1,11 @@
 body {
-    background: #666;
+    background: #fffaeb;
 }
 
 .welcome {
     display: none;
     font: 400 20px/40px '微软雅黑';
-    color: #FFF;
+    color: #2c2c83;
     padding: 8px;
     width: 500px;
     height: 400px;
@@ -13,23 +13,24 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: -120px 0 0 -250px;
+    margin: -150px 0 0 -250px;
 }
 
 .my_blog  a {
     text-decoration: none;
-    color: #FFF;
+    color: #2c2c83;
 }
 
 .icon img {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    border: 3px solid #FFF;
+    border: 3px solid #2c2c83;
 }
 
 .my_blog_title {
-    border: 1px solid #FFF;
+    border: 1px solid #2c2c83;
+    border-radius: 8px;
     width: 146px;
     position: relative;
     left: 50%;
@@ -37,7 +38,7 @@ body {
 }
 
 .my_blog_text {
-    border-top: 1px solid #FFF;
+    border-top: 1px solid #2c2c83;
     font: 400 16px/32px '微软雅黑';
     margin: 20px 0 0 0;
 }
