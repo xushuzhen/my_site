@@ -8,4 +8,4 @@ def index(request):
 
 
 def blog(request):
-    return render(request, 'blog/blog_base.html')
+    return render(request, 'blog/blog.html')
