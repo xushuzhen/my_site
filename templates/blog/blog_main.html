@@ -1,4 +1,5 @@
 {% extends "blog/blog_base.html" %}
+{% load staticfiles %}
 {% block content %}
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -13,7 +14,7 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header">
-{#                            <h3 class="box-title">文章列表</h3>&nbsp;&nbsp;#}
+                            {#                            <h3 class="box-title">文章列表</h3>&nbsp;&nbsp;#}
                         </div>
                         <div class="tab-content">
                             <div class="active tab-pane" id="activity">
@@ -311,6 +312,12 @@
         </section>
     </div>
 {% endblock %}
-{% block scripts %}
-{#    <script src="{% static 'js/bug/bog_management.js' %}"></script>#}
+{% block sidebar_class %}
+    {% for each_class in class_list %}
+        <li>
+            <a href="class/{{ each_class.ClassID }}/">
+                <i class="fa fa-circle-o"></i>{{ each_class.ClassName }}
+            </a>
+        </li>
+    {% endfor %}
 {% endblock %}
