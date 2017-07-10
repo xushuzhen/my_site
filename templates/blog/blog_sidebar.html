@@ -19,15 +19,27 @@
             <li><a href="../../documentation/index.html"><i class="fa fa-laptop"></i> <span>个人简历</span></a></li>
             <li><a href="../../documentation/index.html"><i class="fa fa-calendar"></i> <span>时间轴</span></a></li>
             <li><a href="../../documentation/index.html"><i class="fa fa-dashboard"></i> <span>全站统计</span></a></li>
-            <li class="treeview">
+            <li class="treeview {{ class_tree_view_active }}">
                 <a href="#">
                     <i class="fa fa-pie-chart"></i><span>文章分类</span>
-                    <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
+                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
-                    {% block sidebar_class %}{% endblock %}
+                    {% for each_class in class_list %}
+                        {% if each_class.ClassID == now_class_id %}
+                            <li class="active">
+                                <a href="/blog/class/{{ each_class.ClassID }}/">
+                                    <i class="fa fa-circle-o"></i>{{ each_class.ClassName }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="/blog/class/{{ each_class.ClassID }}/">
+                                    <i class="fa fa-circle-o"></i>{{ each_class.ClassName }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
                 </ul>
             </li>
             <li class="treeview">

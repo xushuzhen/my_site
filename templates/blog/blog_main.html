@@ -312,12 +312,3 @@
         </section>
     </div>
 {% endblock %}
-{% block sidebar_class %}
-    {% for each_class in class_list %}
-        <li>
-            <a href="class/{{ each_class.ClassID }}/">
-                <i class="fa fa-circle-o"></i>{{ each_class.ClassName }}
-            </a>
-        </li>
-    {% endfor %}
-{% endblock %}
