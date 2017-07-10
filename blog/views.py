@@ -25,21 +25,35 @@ def load_sidebar():
         class_list.append(class_dir)
     page_dir = {
         'class_list': class_list,
-        'class_tree_view_active': '',
-        'now_class_id': None,
     }
     return page_dir
 
 
 def blog_main(request):
     page_dir = load_sidebar()
-    print page_dir
     return render(request, 'blog/blog_main.html', page_dir)
+
+
+def blog_about_me(request):
+    page_dir = load_sidebar()
+    page_dir['about_me_active'] = 'active'
+    return render(request, 'blog/blog_about_me.html', page_dir)
+
+
+def blog_time_line(request):
+    page_dir = load_sidebar()
+    page_dir['time_line_active'] = 'active'
+    return render(request, 'blog/blog_time_line.html', page_dir)
+
+
+def blog_about_my_site(request):
+    page_dir = load_sidebar()
+    page_dir['about_my_site_active'] = 'active'
+    return render(request, 'blog/blog_about_my_site.html', page_dir)
 
 
 def blog_class(request, now_class_id):
     page_dir = load_sidebar()
-    page_dir['class_tree_view_active'] = 'active'
+    page_dir['class_active'] = 'active'
     page_dir['now_class_id'] = int(now_class_id)
-    print page_dir
     return render(request, 'blog/blog_class.html', page_dir)
