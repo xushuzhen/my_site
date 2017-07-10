@@ -1,5 +1,4 @@
 {% extends "blog/blog_base.html" %}
-{% load staticfiles %}
 {% block content %}
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -24,9 +23,9 @@
                                         <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg"
                                              alt="user image">
                                         <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                        </span>
+                                            <a href="#">Jonathan Burke Jr.</a>
+                                            <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                                        </span>
                                         <span class="description">Shared publicly - 7:30 PM today</span>
                                     </div>
                                     <!-- /.user-block -->
@@ -59,9 +58,9 @@
                                         <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg"
                                              alt="User Image">
                                         <span class="username">
-                          <a href="#">Sarah Ross</a>
-                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                        </span>
+                                            <a href="#">Sarah Ross</a>
+                                            <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                                        </span>
                                         <span class="description">Sent you a message - 3 days ago</span>
                                     </div>
                                     <!-- /.user-block -->
@@ -94,9 +93,9 @@
                                         <img class="img-circle img-bordered-sm" src="../../dist/img/user6-128x128.jpg"
                                              alt="User Image">
                                         <span class="username">
-                          <a href="#">Adam Jones</a>
-                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                        </span>
+                                            <a href="#">Adam Jones</a>
+                                            <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                                        </span>
                                         <span class="description">Posted 5 photos - 5 days ago</span>
                                     </div>
                                     <!-- /.user-block -->
@@ -152,9 +151,9 @@
                                 <ul class="timeline timeline-inverse">
                                     <!-- timeline time label -->
                                     <li class="time-label">
-                        <span class="bg-red">
-                          10 Feb. 2014
-                        </span>
+                                        <span class="bg-red">
+                                            10 Feb. 2014
+                                        </span>
                                     </li>
                                     <!-- /.timeline-label -->
                                     <!-- timeline item -->
@@ -216,9 +215,9 @@
                                     <!-- END timeline item -->
                                     <!-- timeline time label -->
                                     <li class="time-label">
-                        <span class="bg-green">
-                          3 Jan. 2014
-                        </span>
+                                        <span class="bg-green">
+                                            3 Jan. 2014
+                                        </span>
                                     </li>
                                     <!-- /.timeline-label -->
                                     <!-- timeline item -->
@@ -306,117 +305,10 @@
                             </div>
                             <!-- /.tab-pane -->
                         </div>
-
-                        <div class="box-body">
-                            <table id="joblog_list" class="table table-bordered table-striped display" width="100%">
-                                <thead>
-                                <tr>
-                                    <th name="BugId">testa</th>
-                                    <th name="BugAbstract">b</th>
-                                    <th name="BugLevel">c</th>
-                                    <th name="StartPerson">d</th>
-                                    <th name="BugStatus">e</th>
-                                    <th name="Operate">f</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for each_bug in bug_box %}
-                                    <tr>
-                                        <td>{{ each_bug.BugID }}</td>
-                                        <td>{{ each_bug.BugAbstract }}</td>
-                                        <td>
-                                            <span style="color:{{ each_bug.BugLevelColor }}">{{ each_bug.BugLevel }}
-                                            </span>
-                                        </td>
-                                        <td>{{ each_bug.Username }}</td>
-                                        <td>
-                                            <span style="color:{{ each_bug.BugStatusColor }}">{{ each_bug.BugStatus }}
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-primary btn-xs bug_info"
-                                                    id="{{ each_bug.BugID }}">Bug详情
-                                            </button>
-                                            <button class="btn btn-primary btn-xs circulate_info"
-                                                    id="{{ each_bug.BugID }}">历史流转信息
-                                            </button>
-                                            <button class="btn btn-warning btn-xs circulate"
-                                                    id="{{ each_bug.BugID }}">流转
-                                            </button>
-                                            <button class="btn btn-danger btn-xs solve"
-                                                    id="{{ each_bug.BugID }}">解决
-                                            </button>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
                 </div>
             </div>
         </section>
-    </div>
-
-    <div class="modal fade" id="bug_info_win" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog ">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Bug详情</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal form" role="form">
-                        <table id="joblog_list" class="table table-bordered table-striped display" width="100%">
-                            <tr>
-                                <td>BugID：</td>
-                                <td id="info_win_bug_id">post请求失败</td>
-                            </tr>
-                            <tr>
-                                <td>Bug简介：</td>
-                                <td id="info_win_bug_abstract">post请求失败</td>
-                            </tr>
-                            <tr>
-                                <td>Bug等级：</td>
-                                <td id="info_win_bug_level">post请求失败</td>
-                            </tr>
-                            <tr>
-                                <td>发起人：</td>
-                                <td id="info_win_start_username">post请求失败</td>
-                            </tr>
-                            <tr>
-                                <td>发生时间：</td>
-                                <td id="info_win_start_time">post请求失败</td>
-                            </tr>
-                            <tr>
-                                <td>解决时间：</td>
-                                <td id="info_win_update_time">post请求失败</td>
-                            </tr>
-                            <tr>
-                                <td>Bug状态：</td>
-                                <td id="info_win_bug_status">post请求失败</td>
-                            </tr>
-                            <tr>
-                                <td>出Bug脚本：</td>
-                                <td id="info_win_bug_file">post请求失败</td>
-                            </tr>
-                            <tr>
-                                <td>出Bug函数：</td>
-                                <td id="info_win_bug_position">post请求失败</td>
-                            </tr>
-                            <tr>
-                                <td>Bug详情：</td>
-                                <td id="info_win_bug_info">post请求失败</td>
-                            </tr>
-                        </table>
-                        <div class="form-group" style="text-align: center">
-                            <div class="col-sm-offset-3 col-sm-6">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">返回</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 {% endblock %}
 {% block scripts %}
