@@ -1,49 +1,133 @@
 {% extends "blog/blog_base.html" %}
+{% load staticfiles %}
 {% block content %}
-    <div>
-        测试<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest<br>
-        aaatest
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>Bug管理</h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Bug列表</h3>&nbsp;&nbsp;
+                        </div>
+                        <div class="box-body">
+                            <table id="joblog_list" class="table table-bordered table-striped display" width="100%">
+                                <thead>
+                                <tr>
+                                    <th name="BugId">BugID</th>
+                                    <th name="BugAbstract">Bug描述</th>
+                                    <th name="BugLevel">Bug等级</th>
+                                    <th name="StartPerson">发起人</th>
+                                    <th name="BugStatus">Bug状态</th>
+                                    <th name="Operate">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for each_bug in bug_box %}
+                                    <tr>
+                                        <td>{{ each_bug.BugID }}</td>
+                                        <td>{{ each_bug.BugAbstract }}</td>
+                                        <td>
+                                            <span style="color:{{ each_bug.BugLevelColor }}">{{ each_bug.BugLevel }}
+                                            </span>
+                                        </td>
+                                        <td>{{ each_bug.Username }}</td>
+                                        <td>
+                                            <span style="color:{{ each_bug.BugStatusColor }}">{{ each_bug.BugStatus }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary btn-xs bug_info"
+                                                    id="{{ each_bug.BugID }}">Bug详情
+                                            </button>
+                                            <button class="btn btn-primary btn-xs circulate_info"
+                                                    id="{{ each_bug.BugID }}">历史流转信息
+                                            </button>
+                                            <button class="btn btn-warning btn-xs circulate"
+                                                    id="{{ each_bug.BugID }}">流转
+                                            </button>
+                                            <button class="btn btn-danger btn-xs solve"
+                                                    id="{{ each_bug.BugID }}">解决
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+
+    <div class="modal fade" id="bug_info_win" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Bug详情</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal form" role="form">
+                        <table id="joblog_list" class="table table-bordered table-striped display" width="100%">
+                            <tr>
+                                <td>BugID：</td>
+                                <td id="info_win_bug_id">post请求失败</td>
+                            </tr>
+                            <tr>
+                                <td>Bug简介：</td>
+                                <td id="info_win_bug_abstract">post请求失败</td>
+                            </tr>
+                            <tr>
+                                <td>Bug等级：</td>
+                                <td id="info_win_bug_level">post请求失败</td>
+                            </tr>
+                            <tr>
+                                <td>发起人：</td>
+                                <td id="info_win_start_username">post请求失败</td>
+                            </tr>
+                            <tr>
+                                <td>发生时间：</td>
+                                <td id="info_win_start_time">post请求失败</td>
+                            </tr>
+                            <tr>
+                                <td>解决时间：</td>
+                                <td id="info_win_update_time">post请求失败</td>
+                            </tr>
+                            <tr>
+                                <td>Bug状态：</td>
+                                <td id="info_win_bug_status">post请求失败</td>
+                            </tr>
+                            <tr>
+                                <td>出Bug脚本：</td>
+                                <td id="info_win_bug_file">post请求失败</td>
+                            </tr>
+                            <tr>
+                                <td>出Bug函数：</td>
+                                <td id="info_win_bug_position">post请求失败</td>
+                            </tr>
+                            <tr>
+                                <td>Bug详情：</td>
+                                <td id="info_win_bug_info">post请求失败</td>
+                            </tr>
+                        </table>
+                        <div class="form-group" style="text-align: center">
+                            <div class="col-sm-offset-3 col-sm-6">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">返回</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'js/bug/bog_management.js' %}"></script>
 {% endblock %}
