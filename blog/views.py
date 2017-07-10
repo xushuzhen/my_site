@@ -46,10 +46,10 @@ def blog_time_line(request):
     return render(request, 'blog/blog_time_line.html', page_dir)
 
 
-def blog_about_my_site(request):
+def blog_statistics(request):
     page_dir = load_sidebar()
-    page_dir['about_my_site_active'] = 'active'
-    return render(request, 'blog/blog_about_my_site.html', page_dir)
+    page_dir['statistics_active'] = 'active'
+    return render(request, 'blog/blog_statistics.html', page_dir)
 
 
 def blog_class(request, now_class_id):
@@ -57,3 +57,9 @@ def blog_class(request, now_class_id):
     page_dir['class_active'] = 'active'
     page_dir['now_class_id'] = int(now_class_id)
     return render(request, 'blog/blog_class.html', page_dir)
+
+
+def blog_about_my_site(request):
+    page_dir = load_sidebar()
+    page_dir['about_my_site_active'] = 'active'
+    return render(request, 'blog/blog_about_my_site.html', page_dir)
