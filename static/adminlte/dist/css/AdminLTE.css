@@ -1782,7 +1782,7 @@ a:focus {
 }
 .btn-box-tool {
   padding: 5px;
-  font-size: 12px;
+  font-size: 15px;
   background: transparent;
   color: #97a0b3;
 }
@@ -4785,15 +4785,15 @@ table.text-center th {
 .user-block .description,
 .user-block .comment {
   display: block;
-  margin-left: 50px;
 }
 .user-block .username {
-  font-size: 16px;
+  font-size:21px;
   font-weight: 600;
 }
 .user-block .description {
   color: #999;
-  font-size: 13px;
+  font-size: 15px;
+  padding-top: 10px;
 }
 .user-block.user-block-sm .username,
 .user-block.user-block-sm .description,
