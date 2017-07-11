@@ -2,6 +2,7 @@ from django.shortcuts import render
 from blog.models import Class
 from blog.models import Article
 
+
 # Create your views here.
 
 
@@ -53,6 +54,28 @@ def load_content():
     return content_dir
 
 
+def load_one_article(now_article_id):
+    each_article = Article.objects.get(ArticleID=now_article_id, Status=1)
+    temp_article_dir = {
+        'ArticleID': each_article.ArticleID,
+        'DescriptionSEO': each_article.DescriptionSEO,
+        'KeywordsSEO': each_article.KeywordsSEO,
+        'AuthorSEO': each_article.AuthorSEO,
+        'Title': each_article.Title,
+        'Content': each_article.Content,
+        'Class': each_article.Class,
+        'Lable': each_article.Lable,
+        'PageView': each_article.PageView,
+        'Status': each_article.Status,
+        'CreateTime': each_article.CreateTime,
+        'UpdateTime': each_article.UpdateTime,
+    }
+    article_dir = {
+        'article_dir': temp_article_dir,
+    }
+    return article_dir
+
+
 def blog_main(request):
     sidebar_dir = load_sidebar()
     content_dir = load_content()
@@ -88,3 +111,11 @@ def blog_about_my_site(request):
     sidebar_dir = load_sidebar()
     sidebar_dir['about_my_site_active'] = 'active'
     return render(request, 'blog/blog_about_my_site.html', sidebar_dir)
+
+
+def blog_article(request, now_article_id):
+    sidebar_dir = load_sidebar()
+    this_content_dir = load_one_article(now_article_id)
+    # return render(request, 'blog/blog_article.html', sidebar_dir, this_content_dir)
+    print this_content_dir['article_dir']['Content']
+    return render(request, 'blog/blog_article.html', this_content_dir)

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{% static 'plugins/ionicons/css/ionicons.min.css' %}">
     <link rel="stylesheet" href="{% static 'adminlte/dist/css/AdminLTE.min.css' %}">
     <link rel="stylesheet" href="{% static 'adminlte/dist/css/skins/_all-skins.min.css' %}">
+    {% block links %}{% endblock %}
 </head>
 <body class="skin-blue sidebar-mini pace-done">
 <div class="wrapper">
@@ -35,7 +36,7 @@
 <script src="{% static 'plugins/layer/layer.js' %}"></script>
 <script>
     $.ajaxSetup({
-        data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
     });
 </script>
 {% block scripts %}{% endblock %}

@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^blog/statistics/$', blog_view.blog_statistics),
     url(r'^blog/class/(\d+)/$', blog_view.blog_class),
     url(r'^blog/about_my_site/$', blog_view.blog_about_my_site),
+    url(r'^blog/article/(\d+)/$', blog_view.blog_article),
 ]
