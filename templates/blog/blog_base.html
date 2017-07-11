@@ -19,7 +19,13 @@
 <div class="wrapper">
     {% include "blog/blog_header.html" %}
     {% include "blog/blog_sidebar.html" %}
-    {% block content %}{% endblock %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>{% block content_title %}近期文章{% endblock %}</h1>
+        </section>
+        {% block content %}{% endblock %}
+    </div>
     {% include "blog/blog_footer.html" %}
 </div>
 <script src="{% static 'adminlte/plugins/jQuery/jquery-2.2.3.min.js' %}"></script>
