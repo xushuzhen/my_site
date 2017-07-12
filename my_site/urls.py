@@ -20,7 +20,7 @@ from blog import views as blog_view
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', blog_view.blog_index),
-    url(r'^blog/$', blog_view.blog_main),
+    url(r'^blog/(\d+)/$', blog_view.blog_main),
     url(r'^blog/about_me/$', blog_view.blog_about_me),
     url(r'^blog/time_line/$', blog_view.blog_time_line),
     url(r'^blog/statistics/$', blog_view.blog_statistics),
