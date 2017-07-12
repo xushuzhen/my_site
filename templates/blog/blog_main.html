@@ -11,9 +11,14 @@
                         <div class="post">
                             <div class="user-block">
                             <span class="username">
-{#                                {% for each_article_class in each_article.class_id_list %}#}
-{#                                    <a href="/blog/class/{{ each_article_class }}/" class="btn btn-info btn-sm">{{ }}</a>#}
-{#                                {% endfor %}#}
+                                {% for each_article_class_id in each_article.class_id_list %}
+                                    <a href="/blog/class/{{ each_article_class_id }}/" class="btn btn-info btn-sm">
+                                {% endfor %}
+                                {% for each_article_class_name in each_article.class_name_list %}
+                                    {{ each_article_class_name }}
+                                {% endfor %}
+                                </a>
+
                                 <a href="#">{{ each_article.Title }}</a>
                                 <span class="pull-right btn-box-tool"><i class="fa fa-eye"></i>
                                     浏览({{ each_article.PageView }})
@@ -29,12 +34,9 @@
                             </p>
                             <ul class="list-inline">
                                 <li>
-                                <span class="btn btn-success btn-sm">
-                                    Python
-                                </span>
-                                    <span class="btn btn-success btn-sm">
-                                    Django
-                                </span>
+                                    {% for each_article_lable_name in each_article.lable_name_list %}
+                                        <span class="btn btn-success btn-sm">{{ each_article_lable_name }}</span>
+                                    {% endfor %}
                                 </li>
                                 <li class="pull-right">
                                     <button type="button" class="btn btn-primary btn-sm"><i
@@ -49,91 +51,6 @@
                         </div>
                         <!-- /.post -->
                     {% endfor %}
-                    <div class="post">
-                        <div class="user-block">
-                            <span class="username">
-                                <a class="btn btn-info btn-sm">
-                                    Python
-                                </a>
-                                <a href="#">这是一篇测试文章</a>
-                                <span class="pull-right btn-box-tool"><i class="fa fa-eye"></i> 浏览(1)</span>
-                            </span>
-                            <span class="description"><i
-                                    class="fa fa-clock-o"></i> Shared publicly - 7:30 PM today</span>
-                        </div>
-                        <!-- /.user-block -->
-                        <p>
-                            Lorem ipsum represents a long-held tradition for designers,
-                            typographers and the like. Some people hate it and argue for
-                            its demise, but others ignore the hate as they create awesome
-                            tools to help create filler text for everyone from bacon lovers
-                            to Charlie Sheen fans.
-                        </p>
-                        <ul class="list-inline">
-                            <li>
-                                <span class="btn btn-success btn-sm">
-                                    Python
-                                </span>
-                                <span class="btn btn-success btn-sm">
-                                    Django
-                                </span>
-                            </li>
-                            <li class="pull-right">
-                                <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-thumbs-o-up"></i>
-                                    赞
-                                </button>
-                                <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-share"></i>
-                                    分享
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post">
-                        <div class="user-block">
-                            <span class="username">
-                                <a class="btn btn-info btn-sm">
-                                    随笔
-                                </a>
-                                <a href="#">这也是一篇测试文章</a>
-                                <span class="pull-right btn-box-tool"><i class="fa fa-eye"></i> 浏览(3)</span>
-                            </span>
-                            <span class="description"><i
-                                    class="fa fa-clock-o"></i> Shared publicly - 7:30 PM today</span>
-                        </div>
-                        <!-- /.user-block -->
-                        <p>
-                            Lorem ipsum represents a long-held tradition for designers,
-                            typographers and the like. Some people hate it and argue for
-                            its demise, but others ignore the hate as they create awesome
-                            tools to help create filler text for everyone from bacon lovers
-                            to Charlie Sheen fans.
-                        </p>
-                        <ul class="list-inline">
-                            <li>
-                                <span class="btn btn-success btn-sm">
-                                    Python
-                                </span>
-                                <span class="btn btn-success btn-sm">
-                                    Django
-                                </span>
-                                <span class="btn btn-success btn-sm">
-                                    测试
-                                </span>
-                            </li>
-                            <li class="pull-right">
-                                <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-thumbs-o-up"></i>
-                                    赞
-                                </button>
-                                <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-share"></i>
-                                    分享
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- /.post -->
                     <div class="post" style="text-align: center">
                         <ul class="pagination">
                             <li class="paginate_button previous" id="example2_previous">

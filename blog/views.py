@@ -111,18 +111,18 @@ def load_page(page_type, now_page, type_parem=None):
             'CreateTime': each_article.CreateTime,
             'UpdateTime': each_article.UpdateTime,
         }
-        # class_id_list = article_dir['Class'].split(',')
-        # class_name_dir = {}
-        # for each_class in class_id_list:
-        #     class_name_dir[each_class] = Class.objects.get(ClassID=int(each_class)).ClassName
-        # lable_id_list = article_dir['Lable'].split(',')
-        # lable_name_dir = {}
-        # for each_lable in lable_id_list:
-        #     lable_name_dir[each_lable] = Lable.objects.get(LableID=int(each_lable)).ClassName
-        # # article_dir['class_id_list'] = class_id_list
-        # article_dir['class_name_dir'] = class_name_dir
-        # # article_dir['lable_id_list'] = lable_id_list
-        # article_dir['lable_name_dir'] = lable_name_dir
+        class_id_list = article_dir['Class'].split(',')
+        class_name_list = []
+        for each_class in class_id_list:
+            class_name_list.append(Class.objects.get(ClassID=int(each_class)).ClassName)
+        lable_id_list = article_dir['Lable'].split(',')
+        lable_name_list = []
+        for each_lable in lable_id_list:
+            lable_name_list.append(Lable.objects.get(LableID=int(each_lable)).LableName)
+        article_dir['class_id_list'] = class_id_list
+        article_dir['class_name_list'] = class_name_list
+        article_dir['lable_id_list'] = lable_id_list
+        article_dir['lable_name_list'] = lable_name_list
         article_list.append(article_dir)
     if page_count < 7:
         pages_show = [x for x in range(1, page_count + 1)]
@@ -138,6 +138,7 @@ def load_page(page_type, now_page, type_parem=None):
         'article_list': article_list,
         'page_count': page_count,
         'pages_show': pages_show,
+        'now_page': now_page,
     }
     return content_dir
 
@@ -145,10 +146,18 @@ def load_page(page_type, now_page, type_parem=None):
 def blog_main(request, now_page):
     sidebar_dir = load_sidebar()
     content_dir = load_page('order_time', now_page)
+    previous_page_num = content_dir['now_page']
+    next_page_num = content_dir['now_page']
+    if content_dir['now_page'] != 1:
+        previous_page_num = content_dir['now_page'] - 1
+    if content_dir['now_page'] != content_dir['page_count']:
+        next_page_num = content_dir['now_page'] + 1
     page_dir = {
         'content_list': content_dir['article_list'],
         'pages_show': content_dir['pages_show'],
-        'now_page': int(now_page),
+        'now_page': content_dir['now_page'],
+        'previous_page_num': previous_page_num,
+        'next_page_num': next_page_num,
     }
 
     return render(request, 'blog/blog_main.html', page_dir)
