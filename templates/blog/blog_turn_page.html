@@ -23,17 +23,21 @@
         <ul class="list-inline">
             <li>
                 {% for each_article_lable_name in each_article.lable_name_list %}
-                    <span class="btn btn-success btn-sm">{{ each_article_lable_name }}</span>
+                    <span class="btn btn-success btn-xs">{{ each_article_lable_name }}</span>
                 {% endfor %}
             </li>
             <li class="pull-right">
-                <button type="button" class="btn btn-primary btn-sm"><i
-                        class="fa fa-thumbs-o-up"></i>
-                    赞({{ each_article.PageView }})
-                </button>
-                <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-share"></i>
-                    分享
-                </button>
+                <a href="/blog/class/{{ each_article_class_id }}/" type="button" class="btn btn-primary btn-xs">
+                    <i class="fa fa-chevron-right"></i>
+                    继续阅读
+                </a>
+                {#                <button type="button" class="btn btn-primary btn-sm"><i#}
+                {#                        class="fa fa-thumbs-o-up"></i>#}
+                {#                    赞({{ each_article.PageView }})#}
+                {#                </button>#}
+                {#                <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-share"></i>#}
+                {#                    分享#}
+                {#                </button>#}
             </li>
         </ul>
     </div>
