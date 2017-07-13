@@ -84,6 +84,7 @@ def load_turn_page(page_type, now_page, type_parem=None):
     page_count = 0
     content_list = None
     pages_show = None
+
     if page_type == 'order_time':
         article_count = Article.objects.filter(Status=1).count()
         content_list = Article.objects.filter(Status=1).order_by('-CreateTime')[(now_page - 1) * 8: now_page * 8]
@@ -96,6 +97,7 @@ def load_turn_page(page_type, now_page, type_parem=None):
         page_count = temp_page_count[0] + 1
     else:
         page_count = temp_page_count[0]
+
     article_list = []
     for each_article in content_list:
         article_dir = {
@@ -125,6 +127,7 @@ def load_turn_page(page_type, now_page, type_parem=None):
         article_dir['lable_id_list'] = lable_id_list
         article_dir['lable_name_list'] = lable_name_list
         article_list.append(article_dir)
+
     if page_count < 7:
         pages_show = [x for x in range(1, page_count + 1)]
     elif page_count - now_page == 2:
@@ -135,11 +138,21 @@ def load_turn_page(page_type, now_page, type_parem=None):
         pages_show = [now_page - 6, now_page - 5, now_page - 4, now_page - 3, now_page - 2, now_page - 1, now_page]
     else:
         pages_show = [now_page - 3, now_page - 2, now_page - 1, now_page, now_page + 1, now_page + 2, now_page + 3]
+
+    previous_page_num = now_page
+    next_page_num = now_page
+    if now_page != 1:
+        previous_page_num = now_page - 1
+    if now_page != page_count:
+        next_page_num = now_page + 1
+
     content_dir = {
         'article_list': article_list,
         'page_count': page_count,
         'pages_show': pages_show,
         'now_page': now_page,
+        'previous_page_num': previous_page_num,
+        'next_page_num': next_page_num,
     }
     return content_dir
 
@@ -151,19 +164,7 @@ def blog_redirect(request):
 def blog_main(request, now_page):
     page_dir = load_sidebar()
     content_dir = load_turn_page('order_time', now_page)
-    previous_page_num = content_dir['now_page']
-    next_page_num = content_dir['now_page']
-    if content_dir['now_page'] != 1:
-        previous_page_num = content_dir['now_page'] - 1
-    if content_dir['now_page'] != content_dir['page_count']:
-        next_page_num = content_dir['now_page'] + 1
-    page_dir.update({
-        'content_list': content_dir['article_list'],
-        'pages_show': content_dir['pages_show'],
-        'now_page': content_dir['now_page'],
-        'previous_page_num': previous_page_num,
-        'next_page_num': next_page_num,
-    })
+    page_dir.update(content_dir)
     return render(request, 'blog/blog_main.html', page_dir)
 
 
