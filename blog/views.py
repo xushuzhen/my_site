@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from blog.models import Class
 from blog.models import Article
 from blog.models import Lable
@@ -141,6 +142,10 @@ def load_page(page_type, now_page, type_parem=None):
         'now_page': now_page,
     }
     return content_dir
+
+
+def blog_redirect(request):
+    return HttpResponseRedirect('/blog/1/')
 
 
 def blog_main(request, now_page):
