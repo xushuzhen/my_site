@@ -85,10 +85,10 @@ def load_turn_page(page_type, now_page, type_parem=None):
     content_list = None
     pages_show = None
 
-    if page_type == 'order_time':
+    if page_type == 'order_main_page':
         article_count = Article.objects.filter(Status=1).count()
         content_list = Article.objects.filter(Status=1).order_by('-CreateTime')[(now_page - 1) * 8: now_page * 8]
-    elif page_type == 'order_class':
+    elif page_type == 'order_class_page':
         article_count = Article.objects.filter(Status=1, Class=type_parem).count()
         content_list = Article.objects.filter(Status=1, Class=type_parem).order_by('-CreateTime')[
                        (now_page - 1) * 8: now_page * 8]
@@ -163,7 +163,7 @@ def blog_redirect(request):
 
 def blog_main(request, now_page):
     page_dir = load_sidebar()
-    content_dir = load_turn_page('order_time', now_page)
+    content_dir = load_turn_page('order_main_page', now_page)
     page_dir.update(content_dir)
     return render(request, 'blog/blog_main.html', page_dir)
 
