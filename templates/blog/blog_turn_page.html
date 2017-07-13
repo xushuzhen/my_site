@@ -1,0 +1,74 @@
+{% load staticfiles %}
+{% for each_article in content_list %}
+    <!-- Post -->
+    <div class="post">
+        <div class="user-block">
+            <span class="username">
+                {% for each_article_class_id in each_article.class_id_list %}
+                    <a href="/blog/class/{{ each_article_class_id }}/" class="btn btn-info btn-sm">
+                {% endfor %}
+                {% for each_article_class_name in each_article.class_name_list %}
+                    {{ each_article_class_name }}
+                {% endfor %}
+                </a>
+                <a href="/blog/article/{{ each_article.ArticleID }}/">{{ each_article.Title }}</a>
+                <span class="pull-right btn-box-tool"><i class="fa fa-eye"></i>
+                    浏览({{ each_article.PageView }})
+                </span>
+            </span>
+            <span class="description"><i class="fa fa-clock-o"></i>{{ each_article.CreateTime }}</span>
+        </div>
+        <!-- /.user-block -->
+        <p>{{ each_article.Content }}</p>
+        <ul class="list-inline">
+            <li>
+                {% for each_article_lable_name in each_article.lable_name_list %}
+                    <span class="btn btn-success btn-sm">{{ each_article_lable_name }}</span>
+                {% endfor %}
+            </li>
+            <li class="pull-right">
+                <button type="button" class="btn btn-primary btn-sm"><i
+                        class="fa fa-thumbs-o-up"></i>
+                    赞({{ each_article.PageView }})
+                </button>
+                <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-share"></i>
+                    分享
+                </button>
+            </li>
+        </ul>
+    </div>
+    <!-- /.post -->
+{% endfor %}
+<div class="post" style="text-align: center">
+    <ul class="pagination">
+        <li class="paginate_button previous" id="example2_previous">
+            <a href="/blog/{{ previous_page_num }}/" aria-controls="example2" data-dt-idx="0"
+               tabindex="0">
+                上一页
+            </a>
+        </li>
+        {% for each_page_num in pages_show %}
+            {% if each_page_num == now_page %}
+                <li class="paginate_button active">
+                    <a href="/blog/{{ each_page_num }}/" aria-controls="example2" data-dt-idx="1"
+                       tabindex="0">
+                        {{ each_page_num }}
+                    </a>
+                </li>
+            {% else %}
+                <li class="paginate_button ">
+                    <a href="/blog/{{ each_page_num }}/" aria-controls="example2" data-dt-idx="1"
+                       tabindex="0">
+                        {{ each_page_num }}
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        <li class="paginate_button next" id="example2_next">
+            <a href="/blog/{{ next_page_num }}/" aria-controls="example2" data-dt-idx="7"
+               tabindex="0">
+                下一页
+            </a>
+        </li>
+    </ul>
+</div>
