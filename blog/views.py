@@ -25,10 +25,10 @@ def load_sidebar():
             'UpdateTime': each_class.UpdateTime,
         }
         class_list.append(class_dir)
-    sidebar_dir = {
+    page_dir = {
         'class_list': class_list,
     }
-    return sidebar_dir
+    return page_dir
 
 
 def load_content():
@@ -78,7 +78,7 @@ def load_one_article(now_article_id):
     return article_dir
 
 
-def load_page(page_type, now_page, type_parem=None):
+def load_turn_page(page_type, now_page, type_parem=None):
     now_page = int(now_page)
     article_count = 0
     page_count = 0
@@ -149,58 +149,67 @@ def blog_redirect(request):
 
 
 def blog_main(request, now_page):
-    sidebar_dir = load_sidebar()
-    content_dir = load_page('order_time', now_page)
+    page_dir = load_sidebar()
+    content_dir = load_turn_page('order_time', now_page)
     previous_page_num = content_dir['now_page']
     next_page_num = content_dir['now_page']
     if content_dir['now_page'] != 1:
         previous_page_num = content_dir['now_page'] - 1
     if content_dir['now_page'] != content_dir['page_count']:
         next_page_num = content_dir['now_page'] + 1
-    page_dir = {
+    page_dir.update({
         'content_list': content_dir['article_list'],
         'pages_show': content_dir['pages_show'],
         'now_page': content_dir['now_page'],
         'previous_page_num': previous_page_num,
         'next_page_num': next_page_num,
-    }
-
+    })
     return render(request, 'blog/blog_main.html', page_dir)
 
 
 def blog_about_me(request):
-    sidebar_dir = load_sidebar()
-    sidebar_dir['about_me_active'] = 'active'
-    return render(request, 'blog/blog_about_me.html', sidebar_dir)
+    page_dir = load_sidebar()
+    page_dir.update({
+        'about_me_active': 'active',
+    })
+    return render(request, 'blog/blog_about_me.html', page_dir)
 
 
 def blog_time_line(request):
-    sidebar_dir = load_sidebar()
-    sidebar_dir['time_line_active'] = 'active'
-    return render(request, 'blog/blog_time_line.html', sidebar_dir)
+    page_dir = load_sidebar()
+    page_dir.update({
+        'time_line_active': 'active',
+    })
+    return render(request, 'blog/blog_time_line.html', page_dir)
 
 
 def blog_statistics(request):
-    sidebar_dir = load_sidebar()
-    sidebar_dir['statistics_active'] = 'active'
-    return render(request, 'blog/blog_statistics.html', sidebar_dir)
+    page_dir = load_sidebar()
+    page_dir.update({
+        'statistics_active': 'active',
+    })
+    return render(request, 'blog/blog_statistics.html', page_dir)
 
 
 def blog_class(request, now_class_id):
-    sidebar_dir = load_sidebar()
-    sidebar_dir['class_active'] = 'active'
-    sidebar_dir['now_class_id'] = int(now_class_id)
-    return render(request, 'blog/blog_class.html', sidebar_dir)
+    page_dir = load_sidebar()
+    page_dir.update({
+        'class_active': 'active',
+        'now_class_id': int(now_class_id),
+    })
+    return render(request, 'blog/blog_class.html', page_dir)
 
 
 def blog_about_my_site(request):
-    sidebar_dir = load_sidebar()
-    sidebar_dir['about_my_site_active'] = 'active'
-    return render(request, 'blog/blog_about_my_site.html', sidebar_dir)
+    page_dir = load_sidebar()
+    page_dir.update({
+        'about_my_site_active': 'active',
+    })
+    return render(request, 'blog/blog_about_my_site.html', page_dir)
 
 
 def blog_article(request, now_article_id):
-    sidebar_dir = load_sidebar()
+    page_dir = load_sidebar()
     this_content_dir = load_one_article(now_article_id)
     # return render(request, 'blog/blog_article.html', sidebar_dir, this_content_dir)
     print this_content_dir['article_dir']['Content']
