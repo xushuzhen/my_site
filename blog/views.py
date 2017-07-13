@@ -162,6 +162,13 @@ def blog_redirect(request):
 
 
 def blog_main(request, now_page):
+    import logging
+    logger = logging.getLogger('aaa')
+    if 'HTTP_X_FORWARDED_FOR' in request.META:
+        ip = request.META['HTTP_X_FORWARDED_FOR']
+    else:
+        ip = request.META['REMOTE_ADDR']
+    logger.info('PV:{"TYPE":"ARTICLE","PATH:"%s","COOKIE":"%s","IP":"%s"}' % (request.path, request.COOKIES, ip))
     page_dir = load_sidebar()
     content_dir = load_turn_page('order_main_page', now_page)
     page_dir.update(content_dir)
