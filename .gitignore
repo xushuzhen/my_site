@@ -1,5 +1,6 @@
 .idea
 *.sqlite3
+settings.py
 blog/__pycache__/
 blog/migrations/__pycache__/
 my_site/__pycache__/

@@ -25,13 +25,13 @@ def load_sidebar():
             'UpdateTime': each_class.UpdateTime,
         }
         class_list.append(class_dir)
-    page_dir = {
+    sidebar_dir = {
         'class_list': class_list,
     }
-    return page_dir
+    return sidebar_dir
 
 
-def load_content():
+def load_article():
     articles = Article.objects.filter(Status=1)
     article_list = []
     for each_article in articles:
