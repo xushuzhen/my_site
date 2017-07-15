@@ -46,10 +46,17 @@
 <div class="post" style="text-align: center">
     <ul class="pagination">
         <li class="paginate_button previous" id="example2_previous">
-            <a href="/blog/{{ previous_page_num }}/" aria-controls="example2" data-dt-idx="0"
-               tabindex="0">
-                上一页
-            </a>
+            {% if previous_page_num == now_page %}
+                <a href="#/" aria-controls="example2" data-dt-idx="0"
+                   tabindex="0">
+                    上一页
+                </a>
+            {% else %}
+                <a href="/blog/{{ previous_page_num }}/" aria-controls="example2" data-dt-idx="0"
+                   tabindex="0">
+                    上一页
+                </a>
+            {% endif %}
         </li>
         {% for each_page_num in pages_show %}
             {% if each_page_num == now_page %}
@@ -69,10 +76,17 @@
             {% endif %}
         {% endfor %}
         <li class="paginate_button next" id="example2_next">
-            <a href="/blog/{{ next_page_num }}/" aria-controls="example2" data-dt-idx="7"
-               tabindex="0">
-                下一页
-            </a>
+            {% if next_page_num == now_page %}
+                <a href="#/" aria-controls="example2" data-dt-idx="7"
+                   tabindex="0">
+                    下一页
+                </a>
+            {% else %}
+                <a href="/blog/{{ next_page_num }}/" aria-controls="example2" data-dt-idx="7"
+                   tabindex="0">
+                    下一页
+                </a>
+            {% endif %}
         </li>
     </ul>
 </div>
