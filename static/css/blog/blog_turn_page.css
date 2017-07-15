@@ -1,0 +1,21 @@
+.user-block .username,
+.user-block .description,
+.user-block .comment {
+    margin-left: 0;
+    padding: 5px 0;
+}
+.box-body {
+    border-bottom: 1px solid #d2d6de;
+}
+.page-turn {
+    text-align: center;
+}
+.article-class {
+    padding: 3px 10px;
+}
+.article-title {
+    padding: 3px 5px;
+}
+.box-body p{
+    color: #666;
+}
