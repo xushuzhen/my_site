@@ -219,6 +219,4 @@ def blog_about_my_site(request):
 def blog_article(request, now_article_id):
     page_dir = load_sidebar()
     this_content_dir = load_one_article(now_article_id)
-    # return render(request, 'blog/blog_article.html', sidebar_dir, this_content_dir)
-    print this_content_dir['article_dir']['Content']
     return render(request, 'blog/blog_article.html', this_content_dir)

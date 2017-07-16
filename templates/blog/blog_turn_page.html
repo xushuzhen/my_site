@@ -26,11 +26,11 @@
         <ul class="list-inline">
             <li>
                 {% for each_article_lable_name in each_article.lable_name_list %}
-                    <span class="btn btn-success btn-xs">{{ each_article_lable_name }}</span>
+                    <span class="btn btn-success btn-xs article-lable">{{ each_article_lable_name }}</span>
                 {% endfor %}
             </li>
             <li class="pull-right">
-                <a href="/blog/class/{{ each_article_class_id }}/" type="button" class="btn btn-primary btn-xs">
+                <a href="/blog/article/{{ each_article.ArticleID }}/" type="button" class="btn btn-primary btn-xs">
                     <i class="fa fa-angle-double-right"></i>
                     继续阅读
                 </a>
