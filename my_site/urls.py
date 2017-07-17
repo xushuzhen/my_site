@@ -37,7 +37,6 @@ urlpatterns = [
     url(r'^about_me/$', blog_view.blog_about_me),
     url(r'^time_line/$', blog_view.blog_time_line),
     url(r'^statistics/$', blog_view.blog_statistics),
-    url(r'^class/$', blog_view.blog_class_redirect),
     url(r'^class/(\d+)/$', blog_view.blog_class_redirect),
     url(r'^class/(\d+)/(\d+)/$', blog_view.blog_class),
     url(r'^about_my_site/$', blog_view.blog_about_my_site),

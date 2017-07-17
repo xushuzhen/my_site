@@ -167,7 +167,7 @@ def blog_mine_redirect(request):
     return HttpResponseRedirect('/blog/1/')
 
 
-def blog_class_redirect(request, class_id=1):
+def blog_class_redirect(request, class_id):
     # return HttpResponseRedirect('/blog/class/%s/1/' % class_id)
     return HttpResponseRedirect('/class/%s/1/' % class_id)
 
