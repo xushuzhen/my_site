@@ -85,13 +85,15 @@ def load_turn_page(page_type, now_page, type_parem=None):
     content_list = None
     pages_show = None
     page_type_href = None
+    # page_type_href_head = '/blog'
+    page_type_href_head = ''
 
     if page_type == 'order_main_page':
-        page_type_href = '/blog'
+        page_type_href = '%s' % (page_type_href_head)
         article_count = Article.objects.filter(Status=1).count()
         content_list = Article.objects.filter(Status=1).order_by('-CreateTime')[(now_page - 1) * 8: now_page * 8]
     elif page_type == 'order_class_page':
-        page_type_href = '/blog/class/%s' % type_parem
+        page_type_href = '%s/class/%s' % (page_type_href_head, type_parem)
         article_count = Article.objects.filter(Status=1, Class=type_parem).count()
         content_list = Article.objects.filter(Status=1, Class=type_parem).order_by('-CreateTime')[
                        (now_page - 1) * 8: now_page * 8]
@@ -166,7 +168,8 @@ def blog_mine_redirect(request):
 
 
 def blog_class_redirect(request, class_id=1):
-    return HttpResponseRedirect('/blog/class/%s/1/' % class_id)
+    # return HttpResponseRedirect('/blog/class/%s/1/' % class_id)
+    return HttpResponseRedirect('/class/%s/1/' % class_id)
 
 
 def blog_main(request, now_page):

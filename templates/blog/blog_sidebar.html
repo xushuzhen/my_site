@@ -37,13 +37,15 @@
                     {% for each_class in class_list %}
                         {% if each_class.ClassID == now_class_id %}
                             <li class="active">
-                                <a href="/blog/class/{{ each_class.ClassID }}/">
+{#                                <a href="/blog/class/{{ each_class.ClassID }}/">#}
+                                <a href="/class/{{ each_class.ClassID }}/">
                                     <i class="fa fa-circle-o"></i>{{ each_class.ClassName }}
                                 </a>
                             </li>
                         {% else %}
                             <li>
-                                <a href="/blog/class/{{ each_class.ClassID }}/">
+{#                                <a href="/blog/class/{{ each_class.ClassID }}/">#}
+                                <a href="/class/{{ each_class.ClassID }}/">
                                     <i class="fa fa-circle-o"></i>{{ each_class.ClassName }}
                                 </a>
                             </li>

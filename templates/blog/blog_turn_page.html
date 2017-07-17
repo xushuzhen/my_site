@@ -8,13 +8,15 @@
         <div class="user-block">
             <span class="username">
                 {% for each_article_class_id in each_article.class_id_list %}
-                    <a href="/blog/class/{{ each_article_class_id }}/" class="btn btn-info btn-sm article-class">
+{#                    <a href="/blog/class/{{ each_article_class_id }}/" class="btn btn-info btn-sm article-class">#}
+                    <a href="/class/{{ each_article_class_id }}/" class="btn btn-info btn-sm article-class">
                 {% endfor %}
                 {% for each_article_class_name in each_article.class_name_list %}
                     {{ each_article_class_name }}
                 {% endfor %}
                 </a>
-                <a href="/blog/article/{{ each_article.ArticleID }}/" class="article-title">{{ each_article.Title }}</a>
+{#                <a href="/blog/article/{{ each_article.ArticleID }}/" class="article-title">{{ each_article.Title }}</a>#}
+                <a href="/article/{{ each_article.ArticleID }}/" class="article-title">{{ each_article.Title }}</a>
                 <span class="pull-right btn-box-tool"><i class="fa fa-eye"></i>
                     浏览({{ each_article.PageView }})
                 </span>
@@ -30,7 +32,8 @@
                 {% endfor %}
             </li>
             <li class="pull-right">
-                <a href="/blog/article/{{ each_article.ArticleID }}/" type="button" class="btn btn-primary btn-xs">
+{#                <a href="/blog/article/{{ each_article.ArticleID }}/" type="button" class="btn btn-primary btn-xs">#}
+                <a href="/article/{{ each_article.ArticleID }}/" type="button" class="btn btn-primary btn-xs">
                     <i class="fa fa-angle-double-right"></i>
                     继续阅读
                 </a>
