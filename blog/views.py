@@ -5,7 +5,7 @@ from blog.models import Article
 from blog.models import Lable
 
 # Create your views here.
-page_size = 8
+page_size = 10
 
 
 def blog_index(request):
@@ -73,7 +73,7 @@ def load_one_article(now_article_id):
         'UpdateTime': each_article.UpdateTime,
     }
     article_dir = {
-        'article_dir': temp_article_dir,
+        'this_article': temp_article_dir,
     }
     return article_dir
 
@@ -231,5 +231,6 @@ def blog_about_my_site(request):
 
 def blog_article(request, now_article_id):
     page_dir = load_sidebar()
-    this_content_dir = load_one_article(now_article_id)
-    return render(request, 'blog/blog_article.html', this_content_dir)
+    this_article = load_one_article(now_article_id)
+    page_dir.update(this_article)
+    return render(request, 'blog/blog_article.html', page_dir)

@@ -1,0 +1,45 @@
+.article-title {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 36px;
+}
+
+.btn-box-tool {
+    font-weight: 600;
+}
+
+.article-create-time {
+    margin-right: 10px;
+}
+
+.article-update-time {
+    margin-right: 10px;
+}
+
+.article-page-view {
+    margin-right: 10px;
+}
+
+.article-wrong {
+    margin: 0 5px;
+    padding: 4px 10px;
+}
+
+.box-header.with-border {
+    border-bottom: 2px solid #d2d6de;
+}
+
+.box-footer {
+    border-top: 2px solid #d2d6de;
+}
+
+.article-copy-right {
+    padding: 15px;
+    border: 1px solid #f4f4f4;
+    border-radius: 5px;
+    margin: 10px;
+    line-height: 20px;
+    color: #666;
+    background-color: #f4f4f4;
+}
