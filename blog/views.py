@@ -91,7 +91,8 @@ def load_turn_page(page_type, now_page, type_parem=None):
     if page_type == 'order_main_page':
         page_type_href = '%s' % (page_type_href_head)
         article_count = Article.objects.filter(Status=1).count()
-        content_list = Article.objects.filter(Status=1).order_by('-CreateTime')[(now_page - 1) * 8: now_page * 8]
+        content_list = Article.objects.filter(Status=1).order_by('-CreateTime')[
+                       (now_page - 1) * page_size: now_page * page_size]
     elif page_type == 'order_class_page':
         page_type_href = '%s/class/%s' % (page_type_href_head, type_parem)
         article_count = Article.objects.filter(Status=1, Class=type_parem).count()
@@ -105,13 +106,16 @@ def load_turn_page(page_type, now_page, type_parem=None):
 
     article_list = []
     for each_article in content_list:
+        content = each_article.Content
+        if len(content) > 150:
+            content = '%s...' % content[:150]
         article_dir = {
             'ArticleID': each_article.ArticleID,
             'DescriptionSEO': each_article.DescriptionSEO,
             'KeywordsSEO': each_article.KeywordsSEO,
             'AuthorSEO': each_article.AuthorSEO,
             'Title': each_article.Title,
-            'Content': each_article.Content,
+            'Content': content,
             'Class': each_article.Class,
             'Lable': each_article.Lable,
             'PageView': each_article.PageView,

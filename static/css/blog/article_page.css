@@ -21,9 +21,9 @@
     margin-right: 10px;
 }
 
-.article-wrong {
-    margin: 0 5px;
-    padding: 4px 10px;
+.tell_author {
+    cursor: pointer;
+
 }
 
 .box-header.with-border {
