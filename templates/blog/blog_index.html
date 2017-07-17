@@ -1,10 +1,21 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>欢迎</title>
+    <link rel="stylesheet" href="{% static 'css/blog/blog_index.css' %}">
+    <title>许树真的博客</title>
 </head>
-<body>
-<a href="/1/">欢迎</a>
+<body style="background-image: url('{% static "img/indexbg/3.jpg" %}')">
+<div class="blog-info">
+    <h1>许树真的博客</h1>
+    <h2>不积跬步无以至千里，不积小流无以成江海</h2>
+    <p>分享学习心得</p>
+    <p>记录生活点滴</p>
+    <button class="enter-blog">
+        点我进入
+    </button>
+</div>
+
 </body>
 </html>
