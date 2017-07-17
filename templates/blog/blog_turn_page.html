@@ -56,7 +56,7 @@
                         上一页
                     </a>
                 {% else %}
-                    <a href="/blog/{{ previous_page_num }}/" aria-controls="example2" data-dt-idx="0"
+                    <a href="{{ page_type_href }}/{{ previous_page_num }}/" aria-controls="example2" data-dt-idx="0"
                        tabindex="0">
                         上一页
                     </a>
@@ -65,14 +65,14 @@
             {% for each_page_num in pages_show %}
                 {% if each_page_num == now_page %}
                     <li class="paginate_button active">
-                        <a href="/blog/{{ each_page_num }}/" aria-controls="example2" data-dt-idx="1"
+                        <a href="{{ page_type_href }}/{{ each_page_num }}/" aria-controls="example2" data-dt-idx="1"
                            tabindex="0">
                             {{ each_page_num }}
                         </a>
                     </li>
                 {% else %}
                     <li class="paginate_button ">
-                        <a href="/blog/{{ each_page_num }}/" aria-controls="example2" data-dt-idx="1"
+                        <a href="{{ page_type_href }}/{{ each_page_num }}/" aria-controls="example2" data-dt-idx="1"
                            tabindex="0">
                             {{ each_page_num }}
                         </a>
@@ -86,7 +86,7 @@
                         下一页
                     </a>
                 {% else %}
-                    <a href="/blog/{{ next_page_num }}/" aria-controls="example2" data-dt-idx="7"
+                    <a href="{{ page_type_href }}/{{ next_page_num }}/" aria-controls="example2" data-dt-idx="7"
                        tabindex="0">
                         下一页
                     </a>

@@ -84,11 +84,14 @@ def load_turn_page(page_type, now_page, type_parem=None):
     page_count = 0
     content_list = None
     pages_show = None
+    page_type_href = None
 
     if page_type == 'order_main_page':
+        page_type_href = '/blog'
         article_count = Article.objects.filter(Status=1).count()
         content_list = Article.objects.filter(Status=1).order_by('-CreateTime')[(now_page - 1) * 8: now_page * 8]
     elif page_type == 'order_class_page':
+        page_type_href = '/blog/class/%s' % type_parem
         article_count = Article.objects.filter(Status=1, Class=type_parem).count()
         content_list = Article.objects.filter(Status=1, Class=type_parem).order_by('-CreateTime')[
                        (now_page - 1) * 8: now_page * 8]
@@ -147,6 +150,7 @@ def load_turn_page(page_type, now_page, type_parem=None):
         next_page_num = now_page + 1
 
     content_dir = {
+        'page_type_href': page_type_href,
         'article_list': article_list,
         'page_count': page_count,
         'pages_show': pages_show,
@@ -157,8 +161,12 @@ def load_turn_page(page_type, now_page, type_parem=None):
     return content_dir
 
 
-def blog_redirect(request):
+def blog_mine_redirect(request):
     return HttpResponseRedirect('/blog/1/')
+
+
+def blog_class_redirect(request, class_id=1):
+    return HttpResponseRedirect('/blog/class/%s/1/' % class_id)
 
 
 def blog_main(request, now_page):
@@ -199,8 +207,10 @@ def blog_statistics(request):
     return render(request, 'blog/blog_statistics.html', page_dir)
 
 
-def blog_class(request, now_class_id):
+def blog_class(request, now_class_id, now_page):
     page_dir = load_sidebar()
+    content_dir = load_turn_page('order_class_page', now_page, type_parem=now_class_id)
+    page_dir.update(content_dir)
     page_dir.update({
         'class_active': 'active',
         'now_class_id': int(now_class_id),
