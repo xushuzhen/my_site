@@ -16,15 +16,12 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">导航</li>
-{#            <li class="{{ about_me_active }}"><a href="/blog/about_me/"><i class="fa fa-laptop"></i>#}
             <li class="{{ about_me_active }}"><a href="#"><i class="fa fa-laptop"></i>
                 <span>个人简历</span></a>
             </li>
-{#            <li class="{{ time_line_active }}"><a href="/blog/time_line/"><i class="fa fa-calendar"></i>#}
             <li class="{{ time_line_active }}"><a href="#"><i class="fa fa-calendar"></i>
                 <span>时间轴</span></a>
             </li>
-{#            <li class="{{ statistics_active }}"><a href="/blog/statistics/"><i class="fa fa-dashboard"></i>#}
             <li class="{{ statistics_active }}"><a href="#"><i class="fa fa-dashboard"></i>
                 <span>全站统计</span></a>
             </li>
@@ -37,14 +34,12 @@
                     {% for each_class in class_list %}
                         {% if each_class.ClassID == now_class_id %}
                             <li class="active">
-{#                                <a href="/blog/class/{{ each_class.ClassID }}/">#}
                                 <a href="/class/{{ each_class.ClassID }}/">
                                     <i class="fa fa-circle-o"></i>{{ each_class.ClassName }}
                                 </a>
                             </li>
                         {% else %}
                             <li>
-{#                                <a href="/blog/class/{{ each_class.ClassID }}/">#}
                                 <a href="/class/{{ each_class.ClassID }}/">
                                     <i class="fa fa-circle-o"></i>{{ each_class.ClassName }}
                                 </a>
@@ -73,7 +68,6 @@
                 <ul class="treeview-menu">
                 </ul>
             </li>
-{#            <li class="{{ about_my_site_active }}"><a href="/blog/about_my_site/"><i class="fa fa-share"></i>#}
             <li class="{{ about_my_site_active }}"><a href="#"><i class="fa fa-share"></i>
                 <span>关于本站</span></a>
             </li>
