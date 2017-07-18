@@ -203,9 +203,12 @@ def logger(func):
 @check_cookie
 @logger
 def blog_index(request):
-    img_num = random.randint(1, 10)
+    # img_num = random.randint(1, 10)
+    # page_dir = {
+    #     'img_num': img_num,
+    # }
     page_dir = {
-        'img_num': img_num,
+        'img_num': 10,
     }
     return render(request, 'blog/blog_index.html', page_dir)
 
