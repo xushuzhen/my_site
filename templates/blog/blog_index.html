@@ -3,18 +3,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <style>
+        html, body {
+            background-image: url('/static/img/indexbg/{{ img_num }}.jpg');
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'plugins/buttons/buttons.css' %}">
     <link rel="stylesheet" href="{% static 'css/blog/blog_index.css' %}">
     <title>许树真的博客</title>
 </head>
-<body style="background-image: url('{% static "img/indexbg/3.jpg" %}')">
+<body>
 <div class="blog-info">
     <h1>许树真的博客</h1>
     <h2>不积跬步无以至千里，不积小流无以成江海</h2>
     <p>分享学习心得</p>
     <p>记录生活点滴</p>
-    <button class="enter-blog">
-        点我进入
-    </button>
+    <a href="/1/" class="button button-glow button-royal button-pill button-large enter-blog">点我进入</a>
 </div>
 
 </body>

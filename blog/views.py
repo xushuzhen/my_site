@@ -1,3 +1,5 @@
+import logging
+import random
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from blog.models import Class
@@ -6,10 +8,6 @@ from blog.models import Lable
 
 # Create your views here.
 page_size = 10
-
-
-def blog_index(request):
-    return render(request, 'blog/blog_index.html')
 
 
 def load_sidebar():
@@ -176,8 +174,15 @@ def blog_class_redirect(request, class_id):
     return HttpResponseRedirect('/class/%s/1/' % class_id)
 
 
+def blog_index(request):
+    img_num = random.randint(1, 10)
+    page_dir = {
+        'img_num': img_num,
+    }
+    return render(request, 'blog/blog_index.html', page_dir)
+
+
 def blog_main(request, now_page):
-    import logging
     logger = logging.getLogger('aaa')
     if 'HTTP_X_FORWARDED_FOR' in request.META:
         ip = request.META['HTTP_X_FORWARDED_FOR']
