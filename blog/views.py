@@ -194,7 +194,7 @@ def logger(func):
         else:
             ip = request.META['REMOTE_ADDR']
         visitor = request.COOKIES.get('xsz_blog_visitor')
-        log.info('PV:{"PATH:"%s","VISITOR":"%s","IP":"%s"}' % (request.path, visitor, ip))
+        log.info('PV:{"PATH":"%s","VISITOR":"%s","IP":"%s"}' % (request.path, visitor, ip))
         return func(request, *args, **kwargs)
 
     return out_log
