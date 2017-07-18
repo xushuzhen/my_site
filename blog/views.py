@@ -1,5 +1,6 @@
 import logging
 import random
+import uuid
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from blog.models import Class
@@ -173,6 +174,34 @@ def blog_class_redirect(request, class_id):
     return HttpResponseRedirect('/class/%s/1/' % class_id)
 
 
+def check_cookie(func):
+    def set_cookie(request, *args, **kwargs):
+        cookie = request.COOKIES.get('xsz_blog_visitor')
+        if not cookie:
+            response = HttpResponseRedirect('/')
+            response.set_cookie('xsz_blog_visitor', uuid.uuid4(), 3600 * 24 * 3650)
+            return response
+        return func(request, *args, **kwargs)
+
+    return set_cookie
+
+
+def logger(func):
+    def out_log(request, *args, **kwargs):
+        log = logging.getLogger('pv')
+        if 'HTTP_X_FORWARDED_FOR' in request.META:
+            ip = request.META['HTTP_X_FORWARDED_FOR']
+        else:
+            ip = request.META['REMOTE_ADDR']
+        visitor = request.COOKIES.get('xsz_blog_visitor')
+        log.info('PV:{"PATH:"%s","VISITOR":"%s","IP":"%s"}' % (request.path, visitor, ip))
+        return func(request, *args, **kwargs)
+
+    return out_log
+
+
+@check_cookie
+@logger
 def blog_index(request):
     img_num = random.randint(1, 10)
     page_dir = {
@@ -181,19 +210,17 @@ def blog_index(request):
     return render(request, 'blog/blog_index.html', page_dir)
 
 
+@check_cookie
+@logger
 def blog_main(request, now_page):
-    logger = logging.getLogger('aaa')
-    if 'HTTP_X_FORWARDED_FOR' in request.META:
-        ip = request.META['HTTP_X_FORWARDED_FOR']
-    else:
-        ip = request.META['REMOTE_ADDR']
-    logger.info('PV:{"TYPE":"ARTICLE","PATH:"%s","COOKIE":"%s","IP":"%s"}' % (request.path, request.COOKIES, ip))
     page_dir = load_sidebar()
     content_dir = load_turn_page('order_main_page', now_page)
     page_dir.update(content_dir)
     return render(request, 'blog/blog_main.html', page_dir)
 
 
+@check_cookie
+@logger
 def blog_about_me(request):
     page_dir = load_sidebar()
     page_dir.update({
@@ -202,6 +229,8 @@ def blog_about_me(request):
     return render(request, 'blog/blog_about_me.html', page_dir)
 
 
+@check_cookie
+@logger
 def blog_time_line(request):
     page_dir = load_sidebar()
     page_dir.update({
@@ -210,6 +239,8 @@ def blog_time_line(request):
     return render(request, 'blog/blog_time_line.html', page_dir)
 
 
+@check_cookie
+@logger
 def blog_statistics(request):
     page_dir = load_sidebar()
     page_dir.update({
@@ -218,6 +249,8 @@ def blog_statistics(request):
     return render(request, 'blog/blog_statistics.html', page_dir)
 
 
+@check_cookie
+@logger
 def blog_class(request, now_class_id, now_page):
     page_dir = load_sidebar()
     content_dir = load_turn_page('order_class_page', now_page, type_parem=now_class_id)
@@ -229,6 +262,8 @@ def blog_class(request, now_class_id, now_page):
     return render(request, 'blog/blog_class.html', page_dir)
 
 
+@check_cookie
+@logger
 def blog_about_my_site(request):
     page_dir = load_sidebar()
     page_dir.update({
@@ -237,6 +272,8 @@ def blog_about_my_site(request):
     return render(request, 'blog/blog_about_my_site.html', page_dir)
 
 
+@check_cookie
+@logger
 def blog_article(request, now_article_id):
     page_dir = load_sidebar()
     this_article = load_one_article(now_article_id)
