@@ -29,7 +29,28 @@ class Article(models.Model):
     Content = models.TextField(u'正文')
     Class = models.CharField(u'类别', max_length=20)
     Lable = models.CharField(u'标签', max_length=20)
-    PageView = models.IntegerField()
+    PageView = models.IntegerField(u'阅读量')
     Status = models.IntegerField(u'状态')
     CreateTime = models.DateTimeField(u'创建时间')
     UpdateTime = models.DateTimeField(u'更新时间')
+
+
+class Cookie(models.Model):
+    CookieID = models.AutoField(u'CookieID', primary_key=True, max_length=11)
+    CookieValue = models.CharField(u'Cookie值', max_length=50)
+    CreateTime = models.DateTimeField(u'创建时间')
+
+
+class IP(models.Model):
+    IPID = models.AutoField(u'IPID', primary_key=True, max_length=11)
+    IPValue = models.CharField(u'IP值', max_length=50)
+    CreateTime = models.DateTimeField(u'创建时间')
+
+
+class DailyCount(models.Model):
+    DailyCountID = models.AutoField(u'CookieID', primary_key=True, max_length=11)
+    NewIPNum = models.IntegerField()
+    NewCookieNum = models.IntegerField()
+    ActiveIPNum = models.IntegerField()
+    ActiveCookieNum = models.IntegerField()
+    CreateTime = models.DateTimeField(u'创建时间')
