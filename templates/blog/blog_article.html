@@ -1,4 +1,8 @@
 {% extends "blog/blog_base.html" %}
+{% block meta_keywords %}{{ this_article.KeywordsSEO }}{% endblock %}
+{% block meta_description %}{{ this_article.DescriptionSEO }}{% endblock %}
+{% block meta_author %}{{ this_article.AuthorSEO }}{% endblock %}
+{% block blog_title %}{{ this_article.Title }}{% endblock %}
 {% block links %}
     <link rel="stylesheet" href="/static/plugins/markdown/css/editormd.preview.css">
     <link rel="stylesheet" href="/static/css/blog/article_page.css">
@@ -33,9 +37,6 @@
             });
         });
     </script>
-{% endblock %}
-{% block content_title %}
-    文章页面
 {% endblock %}
 {% block content %}
     <!-- Main content -->
