@@ -47,7 +47,7 @@
                     {% endfor %}
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="treeview {{ top_active }}">
                 <a href="#">
                     <i class="fa fa-book"></i> <span>阅读Top10</span>
                     <span class="pull-right-container">
@@ -55,6 +55,21 @@
                         </span>
                 </a>
                 <ul class="treeview-menu">
+                    {% for each_article in top_article_list %}
+                        {% if each_article.ArticleID == this_article.ArticleID %}
+                            <li class="active">
+                                <a href="/article/{{ each_article.ArticleID }}/">
+                                    <i class="fa fa-circle-o"></i>{{ each_article.Title }} ({{ each_article.PageView }})
+                                </a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="/article/{{ each_article.ArticleID }}/">
+                                    <i class="fa fa-circle-o"></i>{{ each_article.Title }} ({{ each_article.PageView }})
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
                 </ul>
             </li>
             <li class="treeview">

@@ -24,8 +24,21 @@ def load_sidebar():
             'UpdateTime': each_class.UpdateTime,
         }
         class_list.append(class_dir)
+    articles = Article.objects.filter(Status=1).order_by('-PageView')[:10]
+    top_article_list = []
+    for each_article in articles:
+        temp_title = each_article.Title
+        if len(each_article.Title) > 10:
+            temp_title = each_article.Title[:10] + '...'
+        article_dir = {
+            'ArticleID': each_article.ArticleID,
+            'Title': temp_title,
+            'PageView': each_article.PageView,
+        }
+        top_article_list.append(article_dir)
     sidebar_dir = {
         'class_list': class_list,
+        'top_article_list': top_article_list,
     }
     return sidebar_dir
 
@@ -281,4 +294,9 @@ def blog_article(request, now_article_id):
     page_dir = load_sidebar()
     this_article = load_one_article(now_article_id)
     page_dir.update(this_article)
+    for each_article in page_dir['top_article_list']:
+        if this_article['this_article']['ArticleID'] == each_article['ArticleID']:
+            page_dir.update({
+                'top_active': 'active',
+            })
     return render(request, 'blog/blog_article.html', page_dir)
