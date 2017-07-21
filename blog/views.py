@@ -28,12 +28,14 @@ def get_date_range():
             temp_year = flag_year
             temp_month = flag_month + 1
         date_range.append([flag_year, flag_month, 1, temp_year, temp_month, 1])
-        # print flag_year, flag_month, 1, '\t', temp_year, temp_month, 1
+        if i == 11:
+            break
         if flag_month == 1:
             flag_year = flag_year - 1
             flag_month = 12
         else:
             flag_month = flag_month - 1
+    date_range.append([2016, 1, 1, flag_year, flag_month, 1])
     return date_range
 
 
@@ -77,6 +79,7 @@ def load_sidebar():
             'range_date': '%s年%s月' % (each_range[0], each_range[1])
         }
         range_list.append(range_dir)
+    range_list[-1]['range_date'] = '更多'
     sidebar_dir = {
         'class_list': class_list,
         'top_article_list': top_article_list,
@@ -151,7 +154,15 @@ def load_turn_page(page_type, now_page, type_parem=None):
         page_type_href = '%s/class/%s' % (page_type_href_head, type_parem)
         article_count = Article.objects.filter(Status=1, Class=type_parem).count()
         content_list = Article.objects.filter(Status=1, Class=type_parem).order_by('-CreateTime')[
-                       (now_page - 1) * 8: now_page * 8]
+                       (now_page - 1) * page_size: now_page * page_size]
+    elif page_type == 'order_date_page':
+        page_type_href = '%s/article_range/%s' % (page_type_href_head, type_parem)
+        temp_parem_list = type_parem.split('-')
+        start_date = datetime.date(int(temp_parem_list[0]), int(temp_parem_list[1]), int(temp_parem_list[2]))
+        end_date = datetime.date(int(temp_parem_list[3]), int(temp_parem_list[4]), int(temp_parem_list[5]))
+        article_count = Article.objects.filter(Status=1, CreateTime__range=(start_date, end_date)).count()
+        content_list = Article.objects.filter(Status=1, CreateTime__range=(start_date, end_date)).order_by('-CreateTime')[
+                       (now_page - 1) * page_size: now_page * page_size]
     temp_page_count = divmod(article_count, page_size)
     if temp_page_count[1] != 0:
         page_count = temp_page_count[0] + 1
@@ -318,6 +329,19 @@ def blog_class(request, now_class_id, now_page):
         'now_class_id': int(now_class_id),
     })
     return render(request, 'blog/blog_class.html', page_dir)
+
+
+@check_cookie
+@logger
+def blog_article_range(request, now_range, now_page):
+    page_dir = load_sidebar()
+    content_dir = load_turn_page('order_date_page', now_page, type_parem=now_range)
+    page_dir.update(content_dir)
+    page_dir.update({
+        'range_active': 'active',
+        'now_range': now_range,
+    })
+    return render(request, 'blog/blog_article_range.html', page_dir)
 
 
 @check_cookie

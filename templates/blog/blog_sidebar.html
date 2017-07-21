@@ -72,7 +72,7 @@
                     {% endfor %}
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="treeview {{ range_active }}">
                 <a href="#">
                     <i class="fa fa-folder"></i> <span>文章归档</span>
                     <span class="pull-right-container">
@@ -81,19 +81,19 @@
                 </a>
                 <ul class="treeview-menu">
                     {% for each_range in range_list %}
-{#                        {% if each_article.ArticleID == this_article.ArticleID %}#}
-{#                            <li class="active">#}
-{#                                <a href="/article/{{ each_article.ArticleID }}/">#}
-{#                                    <i class="fa fa-circle-o"></i>{{ each_article.Title }} ({{ each_article.PageView }})#}
-{#                                </a>#}
-{#                            </li>#}
-{#                        {% else %}#}
-                            <li>
+                        {% if each_range.range_path == now_range %}
+                            <li class="active">
                                 <a href="/article_range/{{ each_range.range_path }}/">
                                     <i class="fa fa-circle-o"></i>{{ each_range.range_date }} ({{ each_range.range_count }})
                                 </a>
                             </li>
-{#                        {% endif %}#}
+                        {% else %}
+                            <li>
+                                <a href="/article_range/{{ each_range.range_path }}/1/">
+                                    <i class="fa fa-circle-o"></i>{{ each_range.range_date }} ({{ each_range.range_count }})
+                                </a>
+                            </li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             </li>

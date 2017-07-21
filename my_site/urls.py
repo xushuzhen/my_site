@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^statistics/$', blog_view.blog_statistics),
     url(r'^class/(\d+)/$', blog_view.blog_class_redirect),
     url(r'^class/(\d+)/(\d+)/$', blog_view.blog_class),
+    url(r'^article_range/(\d+-\d+-\d+-\d+-\d+-\d+)/(\d+)/$', blog_view.blog_article_range),
     url(r'^about_my_site/$', blog_view.blog_about_my_site),
     url(r'^article/(\d+)/$', blog_view.blog_article),
 ]
