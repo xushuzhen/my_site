@@ -45,6 +45,11 @@
     </div>
     <!-- /.post -->
 {% endfor %}
+{% if page_count == 0 %}
+    <div class="box-body">
+        <p>博主很懒，什么都没留下</p>
+    </div>
+{% endif %}
 <div class="box-body">
     <div class="page-turn">
         <ul class="pagination">
