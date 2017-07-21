@@ -5,18 +5,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="{% block meta_keywords %}许树真,树真,许树真的博客{% endblock %}">
+    <meta name="description" content="{% block meta_description %}许树真的博客记录了许树真的成长过程和生活点滴，包含简历、技术博客和随笔{% endblock %}">
     <meta name="author" content="{% block meta_author %}许树真{% endblock %}">
-    <meta name="description" content="{% block meta_description %}技术博客,随笔,个人简历{% endblock %}">
-    <meta name="keywords" content="{% block meta_keywords %}许树真,许树真的博客{% endblock %}">
-    <title>{% block blog_title %}许树真的博客{% endblock %}</title>
+    <title>{% block blog_title %}许树真的博客——享受进步过程，品味生活情趣{% endblock %}</title>
     <link rel="shortcut icon" href="/static/img/favicon/moying.ico">
-    <link rel="stylesheet" href="{% static 'adminlte/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'plugins/font_awesome/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'plugins/ionicons/css/ionicons.min.css' %}">
-    <link rel="stylesheet" href="{% static 'adminlte/dist/css/AdminLTE.min.css' %}">
-    <link rel="stylesheet" href="{% static 'adminlte/dist/css/skins/_all-skins.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/blog/back_top.css' %}">
-    <script src="{% static 'adminlte/plugins/jQuery/jquery-2.2.3.min.js' %}"></script>
+    <link rel="stylesheet" href="/static/adminlte/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/plugins/font_awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/plugins/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="/static/adminlte/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/static/adminlte/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/static/css/blog/back_top.css">
+    <script src="/static/adminlte/plugins/jQuery/jquery-2.2.3.min.js"></script>
     {% block links %}{% endblock %}
 </head>
 <body class="skin-blue sidebar-mini pace-done">
@@ -33,11 +33,11 @@
     {% include "blog/blog_footer.html" %}
     <a id="go_top" class="btn go_top" href="#top">Top</a>
 </div>
-<script src="{% static 'adminlte/bootstrap/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'adminlte/dist/js/app.min.js' %}"></script>
-<script src="{% static 'plugins/jquery/jquery.validate.min.js' %}"></script>
-<script src="{% static 'plugins/layer/layer.js' %}"></script>
-<script src="{% static 'js/blog/back_top.js' %}"></script>
+<script src="/static/adminlte/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/adminlte/dist/js/app.min.js"></script>
+<script src="/static/plugins/jquery/jquery.validate.min.js"></script>
+<script src="/static/plugins/layer/layer.js"></script>
+<script src="/static/js/blog/back_top.js"></script>
 <script>
     $.ajaxSetup({
         data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
