@@ -1,6 +1,8 @@
+# coding: utf-8
 import logging
 import random
 import uuid
+import datetime
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from blog.models import Class
@@ -9,6 +11,30 @@ from blog.models import Lable
 
 # Create your views here.
 page_size = 10
+
+
+def get_date_range():
+    now_date = datetime.datetime.now()
+    flag_year = now_date.year
+    flag_month = now_date.month
+    temp_year = 0
+    temp_month = 0
+    date_range = []
+    for i in range(0, 12):
+        if flag_month == 12:
+            temp_year = flag_year + 1
+            temp_month = 1
+        else:
+            temp_year = flag_year
+            temp_month = flag_month + 1
+        date_range.append([flag_year, flag_month, 1, temp_year, temp_month, 1])
+        # print flag_year, flag_month, 1, '\t', temp_year, temp_month, 1
+        if flag_month == 1:
+            flag_year = flag_year - 1
+            flag_month = 12
+        else:
+            flag_month = flag_month - 1
+    return date_range
 
 
 def load_sidebar():
@@ -24,8 +50,8 @@ def load_sidebar():
             'UpdateTime': each_class.UpdateTime,
         }
         class_list.append(class_dir)
-    articles = Article.objects.filter(Status=1).order_by('-PageView')[:10]
     top_article_list = []
+    articles = Article.objects.filter(Status=1).order_by('-PageView')[:10]
     for each_article in articles:
         temp_title = each_article.Title
         if len(each_article.Title) > 10:
@@ -36,9 +62,25 @@ def load_sidebar():
             'PageView': each_article.PageView,
         }
         top_article_list.append(article_dir)
+
+    range_list = []
+    date_range = get_date_range()
+    for each_range in date_range:
+        start_date = datetime.date(each_range[0], each_range[1], each_range[2])
+        end_date = datetime.date(each_range[3], each_range[4], each_range[5])
+        range_count = Article.objects.filter(Status=1, CreateTime__range=(start_date, end_date)).count()
+        range_dir = {
+            'range_path': '%s-%s-%s-%s-%s-%s' % (
+                each_range[0], each_range[1], each_range[2], each_range[3], each_range[4], each_range[5]
+            ),
+            'range_count': range_count,
+            'range_date': '%s年%s月' % (each_range[0], each_range[1])
+        }
+        range_list.append(range_dir)
     sidebar_dir = {
         'class_list': class_list,
         'top_article_list': top_article_list,
+        'range_list': range_list,
     }
     return sidebar_dir
 
