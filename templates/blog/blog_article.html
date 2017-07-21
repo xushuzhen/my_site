@@ -1,20 +1,19 @@
 {% extends "blog/blog_base.html" %}
-{% load staticfiles %}
 {% block links %}
-    <link rel="stylesheet" href="{% static 'plugins/markdown/css/editormd.preview.css' %}">
-    <link rel="stylesheet" href="{% static 'css/blog/article_page.css' %}">
+    <link rel="stylesheet" href="/static/plugins/markdown/css/editormd.preview.css">
+    <link rel="stylesheet" href="/static/css/blog/article_page.css">
     <!-- <script src="js/zepto.min.js"></script>
 		<script>
 			var jQuery = Zepto;  // 为了避免修改flowChart.js和sequence-diagram.js的源码，所以使用Zepto.js时想支持flowChart/sequenceDiagram就得加上这一句
 		</script> -->
-    <script src="{% static 'plugins/markdown/lib/marked.min.js' %}"></script>
-    <script src="{% static 'plugins/markdown/lib/prettify.min.js' %}"></script>
-    <script src="{% static 'plugins/markdown/lib/raphael.min.js' %}"></script>
-    <script src="{% static 'plugins/markdown/lib/underscore.min.js' %}"></script>
-    <script src="{% static 'plugins/markdown/lib/sequence-diagram.min.js' %}"></script>
-    <script src="{% static 'plugins/markdown/lib/flowchart.min.js' %}"></script>
-    <script src="{% static 'plugins/markdown/lib/jquery.flowchart.min.js' %}"></script>
-    <script src="{% static 'plugins/markdown/editormd.min.js' %}"></script>
+    <script src="/static/plugins/markdown/lib/marked.min.js"></script>
+    <script src="/static/plugins/markdown/lib/prettify.min.js"></script>
+    <script src="/static/plugins/markdown/lib/raphael.min.js"></script>
+    <script src="/static/plugins/markdown/lib/underscore.min.js"></script>
+    <script src="/static/plugins/markdown/lib/sequence-diagram.min.js"></script>
+    <script src="/static/plugins/markdown/lib/flowchart.min.js"></script>
+    <script src="/static/plugins/markdown/lib/jquery.flowchart.min.js"></script>
+    <script src="/static/plugins/markdown/editormd.min.js"></script>
     <script type="text/javascript">
         $(function () {
             editormd.markdownToHTML("article-md-view", {
