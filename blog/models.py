@@ -31,6 +31,8 @@ class Article(models.Model):
     Lable = models.CharField(u'标签', max_length=20)
     PageView = models.IntegerField(u'阅读量')
     Status = models.IntegerField(u'状态')
+    TimeLine = models.IntegerField(u'时间轴')
+    TimeLineType = models.IntegerField(u'时间轴类型')
     CreateTime = models.DateTimeField(u'创建时间')
     UpdateTime = models.DateTimeField(u'更新时间')
 
