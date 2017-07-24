@@ -169,16 +169,21 @@ def load_turn_page(page_type, now_page, type_parem=None):
     elif page_type == 'order_search_page':
         page_type_href = '%s/search/%s' % (page_type_href_head, type_parem)
         key_words = list(jieba.cut(type_parem))
-        print key_words
         words_num = len(key_words)
         articles = None
         if words_num == 1:
             articles = Article.objects.filter(Title__contains=key_words[0])
         elif words_num == 2:
             articles = Article.objects.filter(Title__contains=key_words[0]).filter(Title__contains=key_words[1])
-        elif words_num >= 3:
+        elif words_num == 3:
             articles = Article.objects.filter(Title__contains=key_words[0]).filter(Title__contains=key_words[1]).filter(
                 Title__contains=key_words[2])
+        elif words_num == 4:
+            articles = Article.objects.filter(Title__contains=key_words[0]).filter(Title__contains=key_words[1]).filter(
+                Title__contains=key_words[2]).filter(Title__contains=key_words[3])
+        elif words_num >= 5:
+            articles = Article.objects.filter(Title__contains=key_words[0]).filter(Title__contains=key_words[1]).filter(
+                Title__contains=key_words[2]).filter(Title__contains=key_words[3]).filter(Title__contains=key_words[4])
         article_count = articles.count()
         content_list = articles.order_by('-CreateTime')[
                        (now_page - 1) * page_size: now_page * page_size]
