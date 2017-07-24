@@ -1,6 +1,8 @@
 # coding: utf-8
 import logging
+import jieba
 import random
+import json
 import uuid
 import datetime
 from django.shortcuts import render
@@ -161,7 +163,24 @@ def load_turn_page(page_type, now_page, type_parem=None):
         start_date = datetime.date(int(temp_parem_list[0]), int(temp_parem_list[1]), int(temp_parem_list[2]))
         end_date = datetime.date(int(temp_parem_list[3]), int(temp_parem_list[4]), int(temp_parem_list[5]))
         article_count = Article.objects.filter(Status=1, CreateTime__range=(start_date, end_date)).count()
-        content_list = Article.objects.filter(Status=1, CreateTime__range=(start_date, end_date)).order_by('-CreateTime')[
+        content_list = Article.objects.filter(Status=1, CreateTime__range=(start_date, end_date)).order_by(
+            '-CreateTime')[
+                       (now_page - 1) * page_size: now_page * page_size]
+    elif page_type == 'order_search_page':
+        page_type_href = '%s/search/%s' % (page_type_href_head, type_parem)
+        key_words = list(jieba.cut(type_parem))
+        print key_words
+        words_num = len(key_words)
+        articles = None
+        if words_num == 1:
+            articles = Article.objects.filter(Title__contains=key_words[0])
+        elif words_num == 2:
+            articles = Article.objects.filter(Title__contains=key_words[0]).filter(Title__contains=key_words[1])
+        elif words_num >= 3:
+            articles = Article.objects.filter(Title__contains=key_words[0]).filter(Title__contains=key_words[1]).filter(
+                Title__contains=key_words[2])
+        article_count = articles.count()
+        content_list = articles.order_by('-CreateTime')[
                        (now_page - 1) * page_size: now_page * page_size]
     temp_page_count = divmod(article_count, page_size)
     if temp_page_count[1] != 0:
@@ -264,6 +283,19 @@ def logger(func):
         return func(request, *args, **kwargs)
 
     return out_log
+
+
+@check_cookie
+@logger
+def search(request, key_words_str, now_page):
+    key_words = key_words_str.split()
+    page_dir = load_sidebar()
+    content_dir = load_turn_page('order_search_page', now_page, type_parem=key_words_str)
+    page_dir.update(content_dir)
+    page_dir.update({
+        'key_words_str': key_words_str,
+    })
+    return render(request, 'blog/blog_search.html', page_dir)
 
 
 @check_cookie

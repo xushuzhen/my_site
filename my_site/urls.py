@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', blog_view.blog_index),
     url(r'^(\d+)/$', blog_view.blog_main),
+    url(r'^search/(\w+)/(\d+)/$', blog_view.search),
     url(r'^about_me/$', blog_view.blog_about_me),
     url(r'^time_line/$', blog_view.blog_time_line),
     url(r'^statistics/$', blog_view.blog_statistics),
