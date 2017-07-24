@@ -39,7 +39,7 @@ class LableDisplay(admin.ModelAdmin):
 @admin.register(Article)
 class ArticleDisplay(admin.ModelAdmin):
     list_display = (
-        'ArticleID', 'Title', 'PageView', 'Status', 'Class', 'Lable', 'CreateTime', 'UpdateTime')
+        'ArticleID', 'Title', 'PageView', 'Status', 'TimeLine', 'TimeLineType', 'Class', 'Lable', 'CreateTime', 'UpdateTime')
     search_fields = ('ArticleID', 'Title')
     list_filter = ('Class', 'Status')
     list_per_page = 10
