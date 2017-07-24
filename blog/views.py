@@ -126,8 +126,8 @@ def load_one_article(now_article_id):
         'Lable': each_article.Lable,
         'PageView': each_article.PageView,
         'Status': each_article.Status,
-        'CreateTime': each_article.CreateTime,
-        'UpdateTime': each_article.UpdateTime,
+        'CreateTime': each_article.CreateTime.strftime('%Y年%m月%d日 %H:%M:%S'),
+        'UpdateTime': each_article.UpdateTime.strftime('%Y年%m月%d日 %H:%M:%S'),
     }
     article_dir = {
         'this_article': temp_article_dir,
@@ -185,8 +185,8 @@ def load_turn_page(page_type, now_page, type_parem=None):
             'Lable': each_article.Lable,
             'PageView': each_article.PageView,
             'Status': each_article.Status,
-            'CreateTime': each_article.CreateTime,
-            'UpdateTime': each_article.UpdateTime,
+            'CreateTime': each_article.CreateTime.strftime('%Y年%m月%d日 %H:%M:%S'),
+            'UpdateTime': each_article.UpdateTime.strftime('%Y年%m月%d日 %H:%M:%S'),
         }
         class_id_list = article_dir['Class'].split(',')
         class_name_list = []
