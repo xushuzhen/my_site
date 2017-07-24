@@ -5,14 +5,16 @@ import random
 import json
 import uuid
 import datetime
+from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from blog.models import Class
 from blog.models import Article
 from blog.models import Lable
 
 # Create your views here.
-page_size = 10
+page_size = 1
 
 
 def get_date_range():
@@ -235,7 +237,14 @@ def load_turn_page(page_type, now_page, type_parem=None):
     elif page_count == now_page:
         pages_show = [now_page - 6, now_page - 5, now_page - 4, now_page - 3, now_page - 2, now_page - 1, now_page]
     else:
-        pages_show = [now_page - 3, now_page - 2, now_page - 1, now_page, now_page + 1, now_page + 2, now_page + 3]
+        if now_page == 1:
+            pages_show = [now_page, now_page + 1, now_page + 2, now_page + 3, now_page + 4, now_page + 5, now_page + 6]
+        elif now_page == 2:
+            pages_show = [now_page - 1, now_page, now_page + 1, now_page + 2, now_page + 3, now_page + 4, now_page + 5]
+        elif now_page == 3:
+            pages_show = [now_page - 2, now_page - 1, now_page, now_page + 1, now_page + 2, now_page + 3, now_page + 4]
+        else:
+            pages_show = [now_page - 3, now_page - 2, now_page - 1, now_page, now_page + 1, now_page + 2, now_page + 3]
 
     previous_page_num = now_page
     next_page_num = now_page
@@ -403,3 +412,8 @@ def blog_article(request, now_article_id):
                 'top_active': 'active',
             })
     return render(request, 'blog/blog_article.html', page_dir)
+
+
+@staff_member_required
+def change_article(request, i):
+    return HttpResponse('Hello')

@@ -1,0 +1,27 @@
+/*.markdown-body ul {*/
+    /*margin-left: inherit;*/
+    /*padding-left: inherit;*/
+/*}*/
+
+/*.markdown-body ul.radiolist {*/
+    /*display: inherit;*/
+    /*margin: inherit;*/
+    /*padding: inherit;*/
+/*}*/
+/*.markdown-body ul li {*/
+    /*list-style: inherit;*/
+/*}*/
+
+.markdown-body ul {
+    margin-left: unset;
+    padding-left: unset;
+}
+
+.markdown-body ul.radiolist {
+    display: unset;
+    margin: unset;
+    padding: unset;
+}
+.markdown-body ul li {
+    list-style: unset;
+}

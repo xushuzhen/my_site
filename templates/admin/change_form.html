@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block field_sets %}
+    <a id="change_article_btn">使用自定义高级编辑界面</a>
     {% for fieldset in adminform %}
         <fieldset class="module aligned {{ fieldset.classes }}">
             {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
@@ -51,6 +52,7 @@
 {% block admin_change_form_document_ready %}
     <script src="/static/adminlte/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <script src="/static/plugins/markdown/editormd.min.js"></script>
+    <script src="/static/js/admin/go_change_article.js"></script>
     <script type="text/javascript">
         var testEditor;
         $(function () {
