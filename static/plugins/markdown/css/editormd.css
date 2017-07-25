@@ -692,6 +692,7 @@
 }
 .editormd .CodeMirror-linenumbers {
   padding: 0 5px;
+  width: 50px;
 }
 .editormd .CodeMirror-selected {
   background: #70B7FF;
