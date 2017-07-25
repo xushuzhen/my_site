@@ -3,6 +3,12 @@
     font-size: 25px;
     font-weight: 500;
     line-height: 36px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.classes_box {
+    text-align: left;
 }
 
 .btn-box-tool {
