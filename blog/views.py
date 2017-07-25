@@ -429,6 +429,9 @@ def change_article(request, this_article_id=None):
         }
         label_list.append(label_dir)
     page_dir.update({
+        'status_select': status_select,
+        'timeline_select': timeline_select,
+        'timeline_type_select': timeline_type_select,
         'class_list': class_list,
         'label_list': label_list,
     })
@@ -440,11 +443,45 @@ def change_article(request, this_article_id=None):
         timeline_selected = this_article['this_article']['TimeLine']
         timeline_type_selected = this_article['this_article']['TimeLineType']
         page_dir.update({
-            'status_select': status_select,
             'status_selected': status_selected,
-            'timeline_select': timeline_select,
             'timeline_selected': timeline_selected,
-            'timeline_type_select': timeline_type_select,
             'timeline_type_selected': timeline_type_selected,
         })
-        return render(request, 'admin/change_and_add_article.html', page_dir)
+    return render(request, 'admin/change_and_add_article.html', page_dir)
+
+
+@staff_member_required
+def article_save(request):
+    try:
+        article_data = request.POST
+        this_article = None
+        now_time = datetime.datetime.now()
+        for temp in article_data:
+            if article_data[temp]:
+                if (' ' + article_data[temp]).strip() == '':
+                    return HttpResponse(json.dumps({'code': '500', 'msg': '%s，为空！！！' % article_data[temp]}),
+                                        content_type='application/json')
+            else:
+                return HttpResponse(json.dumps({'code': '500', 'msg': '参数错误！！！'}), content_type='application/json')
+        if int(article_data['ArticleID']) != -1:
+            this_article = Article.objects.get(ArticleID=article_data['ArticleID'])
+        else:
+            this_article = Article()
+            this_article.CreateTime = now_time
+            this_article.PageView = 0
+        this_article.KeywordsSEO = article_data['KeywordsSEO']
+        this_article.DescriptionSEO = article_data['DescriptionSEO']
+        this_article.AuthorSEO = article_data['AuthorSEO']
+        this_article.Title = article_data['Title']
+        this_article.Content = article_data['Content']
+        this_article.Class = article_data['Class']
+        this_article.Label = article_data['Label']
+        this_article.Status = article_data['Status']
+        this_article.TimeLine = article_data['TimeLine']
+        this_article.TimeLineType = article_data['TimeLineType']
+        this_article.UpdateTime = now_time
+        this_article.save()
+        new_article_id = this_article.ArticleID
+        return HttpResponse(json.dumps({'code': '200', 'msg': new_article_id}), content_type='application/json')
+    except:
+        return HttpResponse(json.dumps({'code': '500', 'msg': '写入错误！！！'}), content_type='application/json')

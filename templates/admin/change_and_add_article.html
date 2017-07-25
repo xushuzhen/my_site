@@ -59,7 +59,7 @@
                     <input class="form-control" id="class_input" placeholder="类别" value="{{ this_article.Class }}">
                     <div class="checkbox">
                         {% for each_class in class_list %}
-                            <label class="checkbox_lable"><input type="checkbox" value="{{ each_class.ClassID }}">{{ each_class.ClassName }}</label>
+                            <label class="checkbox_lable"><input type="checkbox" value="{{ each_class.ClassID }}">{{ each_class.ClassID }} - {{ each_class.ClassName }}</label>
                         {% endfor %}
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                     <input class="form-control" id="lable_input" placeholder="标签" value="{{ this_article.Label }}">
                     <div class="checkbox">
                         {% for each_label in label_list %}
-                            <label class="checkbox_lable"><input type="checkbox" value="{{ each_label.LabelID }}">{{ each_label.LabelName }}</label>
+                            <label class="checkbox_lable"><input type="checkbox" value="{{ each_label.LabelID }}">{{ each_label.LabelID }} - {{ each_label.LabelName }}</label>
                         {% endfor %}
                     </div>
                 </div>
@@ -121,8 +121,7 @@
         </div>
         <div class="box-footer">
             <button type="button" class="btn btn-danger btn-lg delete_button" id="delete_button">删除</button>
-            <button type="button" class="btn btn-warning btn-lg add_button" id="add_button">新增</button>
-            <button type="button" class="btn btn-success btn-lg save_button" id="save_button">修改</button>
+            <button type="button" class="btn btn-success btn-lg save_button" id="save_button">保存</button>
         </div>
     </div>
 </section>
@@ -132,6 +131,7 @@
 <script src="/static/plugins/jquery/jquery.validate.min.js"></script>
 <script src="/static/plugins/markdown/editormd.min.js"></script>
 <script src="/static/plugins/layer/layer.js"></script>
+<script src="/static/js/admin/change_and_add_article.js"></script>
 <script src="/static/js/blog/back_top.js"></script>
 <script type="text/javascript">
     var testEditor;

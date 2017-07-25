@@ -22,6 +22,8 @@ urlpatterns = [
     url(r'^favicon\.ico$', RedirectView.as_view(url=r'static/img/favicon/moying.ico')),
     url(r'^admin/', admin.site.urls),
     url(r'^admin/blog/change_article/(\d+)/$', blog_view.change_article),
+    url(r'^admin/blog/add_article/$', blog_view.change_article),
+    url(r'^admin/blog/article_save/$', blog_view.article_save),
     url(r'^$', blog_view.blog_index),
     url(r'^(\d+)/$', blog_view.blog_main),
     url(r'^search/(\w+)/(\d+)/$', blog_view.search),
