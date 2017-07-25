@@ -4,9 +4,10 @@
         <!-- search form -->
         <div class="sidebar-form">
             <div class="input-group">
-                <input type="text" name="q" id="search-article-input" class="form-control" placeholder="按文章标题关键字查询">
+                <input type="text" name="q" id="search-article-input" class="form-control" placeholder="按标题关键字查询">
                 <span class="input-group-btn">
-                <button type="submit" name="search" id="search-article-button" class="btn btn-flat"><i class="fa fa-search"></i>
+                <button type="submit" name="search" id="search-article-button" class="btn btn-flat"><i
+                        class="fa fa-search"></i>
                 </button>
               </span>
             </div>
@@ -15,15 +16,6 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">导航</li>
-            <li class="{{ about_me_active }}"><a href="#"><i class="fa fa-laptop"></i>
-                <span>个人简历</span></a>
-            </li>
-            <li class="{{ time_line_active }}"><a href="#"><i class="fa fa-calendar"></i>
-                <span>时间轴</span></a>
-            </li>
-            <li class="{{ statistics_active }}"><a href="#"><i class="fa fa-dashboard"></i>
-                <span>全站统计</span></a>
-            </li>
             <li class="treeview {{ class_active }}">
                 <a href="#">
                     <i class="fa fa-pie-chart"></i><span>文章分类</span>
@@ -84,18 +76,29 @@
                         {% if each_range.range_path == now_range %}
                             <li class="active">
                                 <a href="/article_range/{{ each_range.range_path }}/">
-                                    <i class="fa fa-circle-o"></i>{{ each_range.range_date }} ({{ each_range.range_count }})
+                                    <i class="fa fa-circle-o"></i>{{ each_range.range_date }}
+                                    ({{ each_range.range_count }})
                                 </a>
                             </li>
                         {% else %}
                             <li>
                                 <a href="/article_range/{{ each_range.range_path }}/1/">
-                                    <i class="fa fa-circle-o"></i>{{ each_range.range_date }} ({{ each_range.range_count }})
+                                    <i class="fa fa-circle-o"></i>{{ each_range.range_date }}
+                                    ({{ each_range.range_count }})
                                 </a>
                             </li>
                         {% endif %}
                     {% endfor %}
                 </ul>
+            </li>
+            <li class="{{ statistics_active }}"><a href="#"><i class="fa fa-dashboard"></i>
+                <span>全站统计</span></a>
+            </li>
+            <li class="{{ time_line_active }}"><a href="#"><i class="fa fa-calendar"></i>
+                <span>时间轴</span></a>
+            </li>
+            <li class="{{ about_me_active }}"><a href="#"><i class="fa fa-laptop"></i>
+                <span>个人简历</span></a>
             </li>
             <li class="{{ about_my_site_active }}"><a href="#"><i class="fa fa-share"></i>
                 <span>关于本站</span></a>
