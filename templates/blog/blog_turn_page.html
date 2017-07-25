@@ -30,8 +30,8 @@
         <p>{{ each_article.Content }}</p>
         <ul class="list-inline">
             <li>
-                {% for each_article_lable_name in each_article.lable_name_list %}
-                    <span class="btn btn-success btn-xs article-lable">{{ each_article_lable_name }}</span>
+                {% for each_article_label_name in each_article.label_name_list %}
+                    <span class="btn btn-success btn-xs article-label">{{ each_article_label_name }}</span>
                 {% endfor %}
             </li>
             <li class="pull-right">

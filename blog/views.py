@@ -11,7 +11,7 @@ from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from blog.models import Class
 from blog.models import Article
-from blog.models import Lable
+from blog.models import Label
 
 # Create your views here.
 page_size = 10
@@ -92,33 +92,12 @@ def load_sidebar():
     return sidebar_dir
 
 
-def load_article():
-    articles = Article.objects.filter(Status=1)
-    article_list = []
-    for each_article in articles:
-        article_dir = {
-            'ArticleID': each_article.ArticleID,
-            'DescriptionSEO': each_article.DescriptionSEO,
-            'KeywordsSEO': each_article.KeywordsSEO,
-            'AuthorSEO': each_article.AuthorSEO,
-            'Title': each_article.Title,
-            'Content': each_article.Content,
-            'Class': each_article.Class,
-            'Lable': each_article.Lable,
-            'PageView': each_article.PageView,
-            'Status': each_article.Status,
-            'CreateTime': each_article.CreateTime,
-            'UpdateTime': each_article.UpdateTime,
-        }
-        article_list.append(article_dir)
-    content_dir = {
-        'article_list': article_list,
-    }
-    return content_dir
-
-
-def load_one_article(now_article_id):
-    each_article = Article.objects.get(ArticleID=now_article_id, Status=1)
+def load_one_article(now_article_id, now_article_status=1):
+    each_article = None
+    if now_article_status == 1:
+        each_article = Article.objects.get(ArticleID=now_article_id, Status=1)
+    else:
+        each_article = Article.objects.get(ArticleID=now_article_id)
     temp_article_dir = {
         'ArticleID': each_article.ArticleID,
         'DescriptionSEO': each_article.DescriptionSEO,
@@ -127,9 +106,11 @@ def load_one_article(now_article_id):
         'Title': each_article.Title,
         'Content': each_article.Content,
         'Class': each_article.Class,
-        'Lable': each_article.Lable,
+        'Label': each_article.Label,
         'PageView': each_article.PageView,
         'Status': each_article.Status,
+        'TimeLine': each_article.TimeLine,
+        'TimeLineType': each_article.TimeLineType,
         'CreateTime': each_article.CreateTime.strftime('%Y年%m月%d日 %H:%M:%S'),
         'UpdateTime': each_article.UpdateTime.strftime('%Y年%m月%d日 %H:%M:%S'),
     }
@@ -208,9 +189,11 @@ def load_turn_page(page_type, now_page, type_parem=None):
             'Title': each_article.Title,
             'Content': content,
             'Class': each_article.Class,
-            'Lable': each_article.Lable,
+            'Label': each_article.Label,
             'PageView': each_article.PageView,
             'Status': each_article.Status,
+            'TimeLine': each_article.TimeLine,
+            'TimeLineType': each_article.TimeLineType,
             'CreateTime': each_article.CreateTime.strftime('%Y年%m月%d日 %H:%M:%S'),
             'UpdateTime': each_article.UpdateTime.strftime('%Y年%m月%d日 %H:%M:%S'),
         }
@@ -218,14 +201,14 @@ def load_turn_page(page_type, now_page, type_parem=None):
         class_name_list = []
         for each_class in class_id_list:
             class_name_list.append(Class.objects.get(ClassID=int(each_class)).ClassName)
-        lable_id_list = article_dir['Lable'].split(',')
-        lable_name_list = []
-        for each_lable in lable_id_list:
-            lable_name_list.append(Lable.objects.get(LableID=int(each_lable)).LableName)
+        label_id_list = article_dir['Label'].split(',')
+        label_name_list = []
+        for each_label in label_id_list:
+            label_name_list.append(Label.objects.get(LabelID=int(each_label)).LabelName)
         article_dir['class_id_list'] = class_id_list
         article_dir['class_name_list'] = class_name_list
-        article_dir['lable_id_list'] = lable_id_list
-        article_dir['lable_name_list'] = lable_name_list
+        article_dir['label_id_list'] = label_id_list
+        article_dir['label_name_list'] = label_name_list
         article_list.append(article_dir)
 
     if page_count <= 7:
@@ -267,10 +250,6 @@ def load_turn_page(page_type, now_page, type_parem=None):
     return content_dir
 
 
-def blog_mine_redirect(request):
-    return HttpResponseRedirect('/blog/1/')
-
-
 def blog_class_redirect(request, class_id):
     return HttpResponseRedirect('/class/%s/1/' % class_id)
 
@@ -280,7 +259,7 @@ def check_cookie(func):
         cookie = request.COOKIES.get('xsz_blog_visitor')
         if not cookie:
             response = HttpResponseRedirect('/')
-            response.set_cookie('xsz_blog_visitor', uuid.uuid4(), 3600 * 24 * 3650)
+            response.set_cookie('xsz_blog_visitor', uuid.uuid4(), 3600 * 24 * 365 * 10)
             return response
         return func(request, *args, **kwargs)
 
@@ -417,5 +396,54 @@ def blog_article(request, now_article_id):
 
 
 @staff_member_required
-def change_article(request, i):
-    return render(request, 'admin/change_and_add_article.html', {'a': 'a'})
+def change_article(request, this_article_id=None):
+    page_dir = {}
+    status_select = [
+        {'status': 0, 'text': '不展示'},
+        {'status': 1, 'text': '展示在博客上'}
+    ]
+    timeline_select = [
+        {'status': 0, 'text': '不展示'},
+        {'status': 1, 'text': '展示在时间轴上'}
+    ]
+    timeline_type_select = [
+        {'status': 0, 'text': '默认'},
+        {'status': 1, 'text': '文章'},
+        {'status': 2, 'text': '图片'},
+        {'status': 3, 'text': '视频'},
+    ]
+    classes = Class.objects.filter(Status=1)
+    class_list = []
+    for each_class in classes:
+        class_dir = {
+            'ClassID': each_class.ClassID,
+            'ClassName': each_class.ClassName,
+        }
+        class_list.append(class_dir)
+    labels = Label.objects.filter(Status=1)
+    class_list = []
+    for each_class in classes:
+        class_dir = {
+            'ClassID': each_class.ClassID,
+            'ClassName': each_class.ClassName,
+        }
+        class_list.append(class_dir)
+    page_dir.update({
+        'class_list': class_list
+    })
+    if this_article_id:
+        this_article_id = int(this_article_id)
+        this_article = load_one_article(this_article_id, 0)
+        page_dir.update(this_article)
+        status_selected = this_article['this_article']['Status']
+        timeline_selected = this_article['this_article']['TimeLine']
+        timeline_type_selected = this_article['this_article']['TimeLineType']
+        page_dir.update({
+            'status_select': status_select,
+            'status_selected': status_selected,
+            'timeline_select': timeline_select,
+            'timeline_selected': timeline_selected,
+            'timeline_type_select': timeline_type_select,
+            'timeline_type_selected': timeline_type_selected,
+        })
+        return render(request, 'admin/change_and_add_article.html', page_dir)

@@ -12,9 +12,9 @@ class Class(models.Model):
     UpdateTime = models.DateTimeField(u'更新时间')
 
 
-class Lable(models.Model):
-    LableID = models.AutoField(u'标签ID', primary_key=True, max_length=11)
-    LableName = models.CharField(u'标签名', max_length=20)
+class Label(models.Model):
+    LabelID = models.AutoField(u'标签ID', primary_key=True, max_length=11)
+    LabelName = models.CharField(u'标签名', max_length=20)
     Status = models.IntegerField(u'状态')
     CreateTime = models.DateTimeField(u'创建时间')
     UpdateTime = models.DateTimeField(u'更新时间')
@@ -28,7 +28,7 @@ class Article(models.Model):
     Title = models.CharField(u'标题', max_length=100)
     Content = models.TextField(u'正文')
     Class = models.CharField(u'类别', max_length=20)
-    Lable = models.CharField(u'标签', max_length=20)
+    Label = models.CharField(u'标签', max_length=20)
     PageView = models.IntegerField(u'阅读量')
     Status = models.IntegerField(u'状态')
     TimeLine = models.IntegerField(u'时间轴')

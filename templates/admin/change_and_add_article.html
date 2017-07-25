@@ -21,37 +21,42 @@
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">SEO关键字</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="keywords_input" placeholder="SEO关键字">
+                    <input class="form-control" id="keywords_input" placeholder="SEO关键字"
+                           value="{{ this_article.KeywordsSEO }}">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">SEO简介</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="description_input" placeholder="SEO简介">
+                    <input class="form-control" id="description_input" placeholder="SEO简介"
+                           value="{{ this_article.DescriptionSEO }}">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">SEO作者</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="author_input" placeholder="SEO作者">
+                    <input class="form-control" id="author_input" placeholder="SEO作者"
+                           value="{{ this_article.AuthorSEO }}">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">标题</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="title_input" placeholder="标题">
+                    <input class="form-control" id="title_input" placeholder="标题" value="{{ this_article.Title }}">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">正文</label>
+            </div>
+            <div class="form-group">
                 <div class="markdown-body" id="div_id_Content">
-                    <textarea id="content_input"></textarea>
+                    <textarea id="content_input">{{ this_article.Content }}</textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">类别</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="class_input" placeholder="类别">
+                    <input class="form-control" id="class_input" placeholder="类别" value="{{ this_article.Class }}">
                     <div class="checkbox">
                         <label class="checkbox_lable"><input type="checkbox">Checkbox 1</label>
                         <label class="checkbox_lable"><input type="checkbox">Checkbox 2</label>
@@ -62,7 +67,7 @@
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">标签</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="lable_input" placeholder="标签">
+                    <input class="form-control" id="lable_input" placeholder="标签" value="{{ this_article.Lable }}">
                     <div class="checkbox">
                         <label class="checkbox_lable"><input type="checkbox">Checkbox 1</label>
                         <label class="checkbox_lable"><input type="checkbox">Checkbox 2</label>
@@ -74,8 +79,13 @@
                 <label for="inputEmail3" class="col-sm-2 control-label">状态</label>
                 <div class="col-sm-10">
                     <select class="form-control" id="status_select">
-                        <option data-id="0">不展示</option>
-                        <option data-id="1">展示在博客上</option>
+                        {% for each_status in status_select %}
+                            {% if status_selected == each_status.status %}
+                                <option value="{{ each_status.status }}" selected>{{ each_status.text }}</option>
+                            {% else %}
+                                <option value="{{ each_status.status }}">{{ each_status.text }}</option>
+                            {% endif %}
+                        {% endfor %}
                     </select>
                 </div>
             </div>
@@ -83,8 +93,13 @@
                 <label for="inputEmail3" class="col-sm-2 control-label">时间轴</label>
                 <div class="col-sm-10">
                     <select class="form-control" id="timeline_select">
-                        <option data-id="0">不展示</option>
-                        <option data-id="1">展示在时间轴上</option>
+                        {% for each_timeline in timeline_select %}
+                            {% if timeline_selected == each_timeline.status %}
+                                <option value="{{ each_timeline.status }}" selected>{{ each_timeline.text }}</option>
+                            {% else %}
+                                <option value="{{ each_timeline.status }}">{{ each_timeline.text }}</option>
+                            {% endif %}
+                        {% endfor %}
                     </select>
                 </div>
             </div>
@@ -92,11 +107,13 @@
                 <label for="inputEmail3" class="col-sm-2 control-label">时间轴类型</label>
                 <div class="col-sm-10">
                     <select class="form-control" id="timeline_type_select">
-                        <option>option 1</option>
-                        <option>option 2</option>
-                        <option>option 3</option>
-                        <option>option 4</option>
-                        <option>option 5</option>
+                        {% for each_timeline_type in timeline_type_select %}
+                            {% if timeline_type_selected == each_timeline_type.status %}
+                                <option value="{{ each_timeline_type.status }}" selected>{{ each_timeline_type.text }}</option>
+                            {% else %}
+                                <option value="{{ each_timeline_type.status }}">{{ each_timeline_type.text }}</option>
+                            {% endif %}
+                        {% endfor %}
                     </select>
                 </div>
             </div>
@@ -104,7 +121,7 @@
         <div class="box-footer">
             <button type="button" class="btn btn-danger btn-lg delete_button" id="delete_button">删除</button>
             <button type="button" class="btn btn-warning btn-lg add_button" id="add_button">新增</button>
-            <button type="button" class="btn btn-success btn-lg save_button" id="save_button">保存</button>
+            <button type="button" class="btn btn-success btn-lg save_button" id="save_button">修改</button>
         </div>
     </div>
 </section>
@@ -163,7 +180,6 @@
         });
     });
 </script>
-
 <script>
     $.ajaxSetup({
         data: {csrfmiddlewaretoken: '{{ csrf_token }}'}

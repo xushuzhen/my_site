@@ -1,7 +1,7 @@
 # coding:utf-8
 from django.contrib import admin
 from blog.models import Class
-from blog.models import Lable
+from blog.models import Label
 from blog.models import Article
 
 
@@ -27,10 +27,10 @@ class ClassDisplay(admin.ModelAdmin):
     actions = [status_true, status_false]
 
 
-@admin.register(Lable)
-class LableDisplay(admin.ModelAdmin):
-    list_display = ('LableID', 'LableName', 'Status', 'CreateTime', 'UpdateTime')
-    search_fields = ('LableID', 'LableName')
+@admin.register(Label)
+class LabelDisplay(admin.ModelAdmin):
+    list_display = ('LabelID', 'LabelName', 'Status', 'CreateTime', 'UpdateTime')
+    search_fields = ('LabelID', 'LabelName')
     list_filter = ('Status',)
     list_per_page = 10
     actions = [status_true, status_false]
@@ -39,7 +39,7 @@ class LableDisplay(admin.ModelAdmin):
 @admin.register(Article)
 class ArticleDisplay(admin.ModelAdmin):
     list_display = (
-        'ArticleID', 'Title', 'PageView', 'Status', 'TimeLine', 'TimeLineType', 'Class', 'Lable', 'CreateTime', 'UpdateTime')
+        'ArticleID', 'Title', 'PageView', 'Status', 'TimeLine', 'TimeLineType', 'Class', 'Label', 'CreateTime', 'UpdateTime')
     search_fields = ('ArticleID', 'Title')
     list_filter = ('Class', 'Status')
     list_per_page = 10
