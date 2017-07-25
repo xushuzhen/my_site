@@ -58,20 +58,20 @@
                 <div class="col-sm-10">
                     <input class="form-control" id="class_input" placeholder="类别" value="{{ this_article.Class }}">
                     <div class="checkbox">
-                        <label class="checkbox_lable"><input type="checkbox">Checkbox 1</label>
-                        <label class="checkbox_lable"><input type="checkbox">Checkbox 2</label>
-                        <label class="checkbox_lable"><input type="checkbox">Checkbox 3</label>
+                        {% for each_class in class_list %}
+                            <label class="checkbox_lable"><input type="checkbox" value="{{ each_class.ClassID }}">{{ each_class.ClassName }}</label>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">标签</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="lable_input" placeholder="标签" value="{{ this_article.Lable }}">
+                    <input class="form-control" id="lable_input" placeholder="标签" value="{{ this_article.Label }}">
                     <div class="checkbox">
-                        <label class="checkbox_lable"><input type="checkbox">Checkbox 1</label>
-                        <label class="checkbox_lable"><input type="checkbox">Checkbox 2</label>
-                        <label class="checkbox_lable"><input type="checkbox">Checkbox 3</label>
+                        {% for each_label in label_list %}
+                            <label class="checkbox_lable"><input type="checkbox" value="{{ each_label.LabelID }}">{{ each_label.LabelName }}</label>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -109,7 +109,8 @@
                     <select class="form-control" id="timeline_type_select">
                         {% for each_timeline_type in timeline_type_select %}
                             {% if timeline_type_selected == each_timeline_type.status %}
-                                <option value="{{ each_timeline_type.status }}" selected>{{ each_timeline_type.text }}</option>
+                                <option value="{{ each_timeline_type.status }}"
+                                        selected>{{ each_timeline_type.text }}</option>
                             {% else %}
                                 <option value="{{ each_timeline_type.status }}">{{ each_timeline_type.text }}</option>
                             {% endif %}

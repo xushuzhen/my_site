@@ -421,15 +421,16 @@ def change_article(request, this_article_id=None):
         }
         class_list.append(class_dir)
     labels = Label.objects.filter(Status=1)
-    class_list = []
-    for each_class in classes:
-        class_dir = {
-            'ClassID': each_class.ClassID,
-            'ClassName': each_class.ClassName,
+    label_list = []
+    for each_label in labels:
+        label_dir = {
+            'LabelID': each_label.LabelID,
+            'LabelName': each_label.LabelName,
         }
-        class_list.append(class_dir)
+        label_list.append(label_dir)
     page_dir.update({
-        'class_list': class_list
+        'class_list': class_list,
+        'label_list': label_list,
     })
     if this_article_id:
         this_article_id = int(this_article_id)
