@@ -43,6 +43,20 @@ def get_date_range():
     return date_range
 
 
+def get_article_class_list(class_id_list):
+    class_name_list = {}
+    for each_class in class_id_list:
+        class_name_list[each_class] = Class.objects.get(ClassID=int(each_class)).ClassName
+    return class_name_list
+
+
+def get_article_lable_list(label_id_list):
+    label_name_list = []
+    for each_label in label_id_list:
+        label_name_list.append(Label.objects.get(LabelID=int(each_label)).LabelName)
+    return label_name_list
+
+
 def load_sidebar():
     classes = Class.objects.filter(Status=1)
     class_list = []
@@ -198,13 +212,9 @@ def load_turn_page(page_type, now_page, type_parem=None):
             'UpdateTime': each_article.UpdateTime.strftime('%Y年%m月%d日 %H:%M:%S'),
         }
         class_id_list = article_dir['Class'].split(',')
-        class_name_list = []
-        for each_class in class_id_list:
-            class_name_list.append(Class.objects.get(ClassID=int(each_class)).ClassName)
         label_id_list = article_dir['Label'].split(',')
-        label_name_list = []
-        for each_label in label_id_list:
-            label_name_list.append(Label.objects.get(LabelID=int(each_label)).LabelName)
+        class_name_list = get_article_class_list(class_id_list)
+        label_name_list = get_article_lable_list(label_id_list)
         article_dir['class_id_list'] = class_id_list
         article_dir['class_name_list'] = class_name_list
         article_dir['label_id_list'] = label_id_list
@@ -392,6 +402,16 @@ def blog_article(request, now_article_id):
             page_dir.update({
                 'top_active': 'active',
             })
+    class_id_list = this_article['this_article']['Class'].split(',')
+    label_id_list = this_article['this_article']['Label'].split(',')
+    class_name_list = get_article_class_list(class_id_list)
+    label_name_list = get_article_lable_list(label_id_list)
+    page_dir.update({
+        'class_id_list': class_id_list,
+        'class_name_list': class_name_list,
+        'label_id_list': label_id_list,
+        'label_name_list': label_name_list,
+    })
     return render(request, 'blog/blog_article.html', page_dir)
 
 
