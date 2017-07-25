@@ -228,23 +228,25 @@ def load_turn_page(page_type, now_page, type_parem=None):
         article_dir['lable_name_list'] = lable_name_list
         article_list.append(article_dir)
 
-    if page_count < 7:
+    if page_count <= 7:
         pages_show = [x for x in range(1, page_count + 1)]
-    elif page_count - now_page == 2:
-        pages_show = [now_page - 4, now_page - 3, now_page - 2, now_page - 1, now_page, now_page + 1, now_page + 2]
-    elif page_count - now_page == 1:
-        pages_show = [now_page - 5, now_page - 4, now_page - 3, now_page - 2, now_page - 1, now_page, now_page + 1]
-    elif page_count == now_page:
-        pages_show = [now_page - 6, now_page - 5, now_page - 4, now_page - 3, now_page - 2, now_page - 1, now_page]
     else:
         if now_page == 1:
-            pages_show = [now_page, now_page + 1, now_page + 2, now_page + 3, now_page + 4, now_page + 5, now_page + 6]
+            pages_show = [1, 2, 3, 4, 5, '...', page_count]
         elif now_page == 2:
-            pages_show = [now_page - 1, now_page, now_page + 1, now_page + 2, now_page + 3, now_page + 4, now_page + 5]
+            pages_show = [1, 2, 3, 4, 5, '...', page_count]
         elif now_page == 3:
-            pages_show = [now_page - 2, now_page - 1, now_page, now_page + 1, now_page + 2, now_page + 3, now_page + 4]
+            pages_show = [1, 2, 3, 4, 5, '...', page_count]
+        elif now_page == 4:
+            pages_show = [1, 2, 3, 4, 5, '...', page_count]
+        elif page_count - now_page == 2:
+            pages_show = [1, '...', now_page - 2, now_page - 1, now_page, now_page + 1, now_page + 2]
+        elif page_count - now_page == 1:
+            pages_show = [1, '...', now_page - 3, now_page - 2, now_page - 1, now_page, now_page + 1]
+        elif page_count == now_page:
+            pages_show = [1, '...', now_page - 4, now_page - 3, now_page - 2, now_page - 1, now_page]
         else:
-            pages_show = [now_page - 3, now_page - 2, now_page - 1, now_page, now_page + 1, now_page + 2, now_page + 3]
+            pages_show = [1, '...', now_page - 1, now_page, now_page + 1, '...', page_count]
 
     previous_page_num = now_page
     next_page_num = now_page
