@@ -193,8 +193,9 @@ def load_turn_page(page_type, now_page, type_parem=None):
     article_list = []
     for each_article in content_list:
         content = each_article.Content
-        if len(content) > 150:
-            content = '%s...' % content[:150]
+        content = content.replace('#', '')
+        if len(content) > 200:
+            content = '%s...' % content[:200]
         article_dir = {
             'ArticleID': each_article.ArticleID,
             'DescriptionSEO': each_article.DescriptionSEO,
