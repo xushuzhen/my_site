@@ -14,7 +14,7 @@ from blog.models import Article
 from blog.models import Lable
 
 # Create your views here.
-page_size = 1
+page_size = 10
 
 
 def get_date_range():
