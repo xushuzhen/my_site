@@ -416,4 +416,4 @@ def blog_article(request, now_article_id):
 
 @staff_member_required
 def change_article(request, i):
-    return HttpResponse('Hello')
+    return render(request, 'admin/change_and_add_article.html', {'a': 'a'})
