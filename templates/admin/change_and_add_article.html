@@ -46,14 +46,6 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">正文</label>
-            </div>
-            <div class="form-group">
-                <div class="markdown-body" id="div_id_Content">
-                    <textarea id="content_input">{{ this_article.Content }}</textarea>
-                </div>
-            </div>
-            <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">类别</label>
                 <div class="col-sm-10">
                     <input class="form-control" id="class_input" placeholder="类别" value="{{ this_article.Class }}"
@@ -138,6 +130,15 @@
                     </select>
                 </div>
             </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">正文</label>
+            </div>
+            <div class="form-group">
+                <div class="markdown-body" id="div_id_Content">
+                    <textarea id="content_input">{{ this_article.Content }}</textarea>
+                </div>
+            </div>
+
         </div>
         <div class="box-footer">
             <button type="button" class="btn btn-danger btn-lg delete_button" id="delete_button">删除</button>
