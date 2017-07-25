@@ -21,80 +21,77 @@
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">SEO关键字</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="SEO关键字">
+                    <input class="form-control" id="keywords_input" placeholder="SEO关键字">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">SEO简介</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="SEO简介">
+                    <input class="form-control" id="description_input" placeholder="SEO简介">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">SEO作者</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="SEO作者">
+                    <input class="form-control" id="author_input" placeholder="SEO作者">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">标题</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="标题">
+                    <input class="form-control" id="title_input" placeholder="标题">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">正文</label>
                 <div class="markdown-body" id="div_id_Content">
-                    <textarea></textarea>
+                    <textarea id="content_input"></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">类别</label>
                 <div class="col-sm-10">
-                    <label><input type="checkbox" value="1">aa</label>
-                    {#                    <input type="email" class="form-control" id="inputEmail3" placeholder="类别">#}
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox">
-                        Checkbox 1
-                    </label>
+                    <input class="form-control" id="class_input" placeholder="类别">
+                    <div class="checkbox">
+                        <label class="checkbox_lable"><input type="checkbox">Checkbox 1</label>
+                        <label class="checkbox_lable"><input type="checkbox">Checkbox 2</label>
+                        <label class="checkbox_lable"><input type="checkbox">Checkbox 3</label>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">标签</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="标签">
+                    <input class="form-control" id="lable_input" placeholder="标签">
+                    <div class="checkbox">
+                        <label class="checkbox_lable"><input type="checkbox">Checkbox 1</label>
+                        <label class="checkbox_lable"><input type="checkbox">Checkbox 2</label>
+                        <label class="checkbox_lable"><input type="checkbox">Checkbox 3</label>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">状态</label>
                 <div class="col-sm-10">
-                    <select class="form-control">
-                        <option data-id="">option 1</option>
-                        <option>option 2</option>
-                        <option>option 3</option>
-                        <option>option 4</option>
-                        <option>option 5</option>
+                    <select class="form-control" id="status_select">
+                        <option data-id="0">不展示</option>
+                        <option data-id="1">展示在博客上</option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">时间轴</label>
                 <div class="col-sm-10">
-                    <select class="form-control">
-                        <option>option 1</option>
-                        <option>option 2</option>
-                        <option>option 3</option>
-                        <option>option 4</option>
-                        <option>option 5</option>
+                    <select class="form-control" id="timeline_select">
+                        <option data-id="0">不展示</option>
+                        <option data-id="1">展示在时间轴上</option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">时间轴类型</label>
                 <div class="col-sm-10">
-                    <select class="form-control">
+                    <select class="form-control" id="timeline_type_select">
                         <option>option 1</option>
                         <option>option 2</option>
                         <option>option 3</option>
@@ -105,9 +102,13 @@
             </div>
         </div>
         <div class="box-footer">
+            <button type="button" class="btn btn-danger btn-lg delete_button" id="delete_button">删除</button>
+            <button type="button" class="btn btn-warning btn-lg add_button" id="add_button">新增</button>
+            <button type="button" class="btn btn-success btn-lg save_button" id="save_button">保存</button>
         </div>
     </div>
 </section>
+<a id="go_top" class="btn go_top" href="#top">Top</a>
 <script src="/static/adminlte/bootstrap/js/bootstrap.min.js"></script>
 <script src="/static/adminlte/dist/js/app.min.js"></script>
 <script src="/static/plugins/jquery/jquery.validate.min.js"></script>
@@ -121,10 +122,10 @@
             width: "90%",
             height: 740,
             path: '/static/plugins/markdown/lib/',
-{#            theme: "dark",#}
-{#            previewTheme: "dark",#}
-{#            editorTheme: "pastel-on-dark",#}
-{#            markdown: md,#}
+            {#            theme: "dark",#}
+            {#            previewTheme: "dark",#}
+            {#            editorTheme: "pastel-on-dark",#}
+            {#            markdown: md,#}
             codeFold: true,
             //syncScrolling : false,
             saveHTMLToTextarea: true,    // 保存 HTML 到 Textarea

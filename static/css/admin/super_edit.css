@@ -1,6 +1,31 @@
 .edit_title {
     text-align: center;
+    margin: 20px;
 }
+
 .form-control {
     width: 500px;
+}
+
+.checkbox_lable {
+    margin: 5px;
+}
+
+.box-footer {
+    text-align: center;
+}
+
+.save_button {
+    width: 200px;
+    margin: 20px;
+}
+
+.add_button {
+    width: 200px;
+    margin: 20px;
+}
+
+.delete_button {
+    width: 200px;
+    margin: 20px;
 }
