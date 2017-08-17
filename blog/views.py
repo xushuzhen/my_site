@@ -60,6 +60,8 @@ def get_article_lable_list(label_id_list):
 def load_sidebar():
     classes = Class.objects.filter(Status=1)
     class_list = []
+    temp_class_list_dir = {}
+    temp_class_dir = {}
     for each_class in classes:
         article_count = Article.objects.filter(Class=each_class.ClassID).count()
         class_dir = {
@@ -71,7 +73,12 @@ def load_sidebar():
             'CreateTime': each_class.CreateTime,
             'UpdateTime': each_class.UpdateTime,
         }
-        class_list.append(class_dir)
+        temp_class_dir[each_class.ClassID] = article_count
+        temp_class_list_dir[each_class.ClassID] = class_dir
+    temp_sort_class_dir = sorted(temp_class_dir.items(), key=lambda d: d[1], reverse=True)
+    for sort_class in temp_sort_class_dir:
+        class_list.append(temp_class_list_dir[sort_class[0]])
+
     top_article_list = []
     articles = Article.objects.filter(Status=1).order_by('-PageView')[:10]
     for each_article in articles:
