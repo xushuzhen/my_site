@@ -26,13 +26,13 @@
                         {% if each_class.ClassID == now_class_id %}
                             <li class="active">
                                 <a href="/class/{{ each_class.ClassID }}/">
-                                    <i class="fa fa-circle-o"></i>{{ each_class.ClassName }}
+                                    <i class="fa fa-circle-o"></i>{{ each_class.ClassName }} ({{ each_class.ClassArticleCount }})
                                 </a>
                             </li>
                         {% else %}
                             <li>
                                 <a href="/class/{{ each_class.ClassID }}/">
-                                    <i class="fa fa-circle-o"></i>{{ each_class.ClassName }}
+                                    <i class="fa fa-circle-o"></i>{{ each_class.ClassName }} ({{ each_class.ClassArticleCount }})
                                 </a>
                             </li>
                         {% endif %}
