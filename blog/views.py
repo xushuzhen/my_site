@@ -63,7 +63,7 @@ def load_sidebar():
     temp_class_list_dir = {}
     temp_class_dir = {}
     for each_class in classes:
-        article_count = Article.objects.filter(Class=each_class.ClassID).count()
+        article_count = Article.objects.filter(Class=each_class.ClassID, Status=1).count()
         class_dir = {
             'ClassID': each_class.ClassID,
             'ClassName': each_class.ClassName,
