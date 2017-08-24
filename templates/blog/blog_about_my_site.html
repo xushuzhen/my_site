@@ -1,140 +1,107 @@
 {% extends "blog/blog_base.html" %}
-{% block content_title %}
-    关于本站
+{% block meta_keywords %}{{ this_article.KeywordsSEO }}{% endblock %}
+{% block meta_description %}{{ this_article.DescriptionSEO }}{% endblock %}
+{% block meta_author %}{{ this_article.AuthorSEO }}{% endblock %}
+{% block blog_title %}{{ this_article.Title }}{% endblock %}
+{% block links %}
+    <link rel="stylesheet" href="/static/plugins/markdown/css/editormd.preview.css">
+    <link rel="stylesheet" href="/static/css/blog/article_page.css">
+    <!-- <script src="js/zepto.min.js"></script>
+		<script>
+			var jQuery = Zepto;  // 为了避免修改flowChart.js和sequence-diagram.js的源码，所以使用Zepto.js时想支持flowChart/sequenceDiagram就得加上这一句
+		</script> -->
+    <script src="/static/plugins/markdown/lib/marked.min.js"></script>
+    <script src="/static/plugins/markdown/lib/prettify.min.js"></script>
+    <script src="/static/plugins/markdown/lib/raphael.min.js"></script>
+    <script src="/static/plugins/markdown/lib/underscore.min.js"></script>
+    <script src="/static/plugins/markdown/lib/sequence-diagram.min.js"></script>
+    <script src="/static/plugins/markdown/lib/flowchart.min.js"></script>
+    <script src="/static/plugins/markdown/lib/jquery.flowchart.min.js"></script>
+    <script src="/static/plugins/markdown/editormd.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            editormd.markdownToHTML("article-md-view", {
+                //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+                htmlDecode: "style,script,iframe",  // you can filter tags decode
+                //toc             : false,
+                tocm: true,    // Using [TOCM]
+                //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+                //gfm             : false,
+                //tocDropdown     : true,
+                // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+                emoji: true,
+                taskList: true,
+                tex: true,  // 默认不解析
+                flowChart: true,  // 默认不解析
+                sequenceDiagram: true,  // 默认不解析
+            });
+        });
+    </script>
 {% endblock %}
 {% block content %}
     <!-- Main content -->
     <section class="content">
-        <div class="nav-tabs-custom">
-            <div class="tab-content">
-                <div class="active tab-pane" id="activity">
-                    <!-- Post -->
-                    <div class="post">
-                        <div class="user-block">
-                            <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg"
-                                 alt="user image">
-                            <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                        </span>
-                            <span class="description">Shared publicly - 7:30 PM today</span>
-                        </div>
-                        <!-- /.user-block -->
-                        <p>
-                            Lorem ipsum represents a long-held tradition for designers,
-                            typographers and the like. Some people hate it and argue for
-                            its demise, but others ignore the hate as they create awesome
-                            tools to help create filler text for everyone from bacon lovers
-                            to Charlie Sheen fans.
-                        </p>
-                        <ul class="list-inline">
-                            <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a>
-                            </li>
-                            <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>
-                                Like</a>
-                            </li>
-                            <li class="pull-right">
-                                <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i>
-                                    Comments
-                                    (5)</a></li>
-                        </ul>
-
-                        <input class="form-control input-sm" type="text" placeholder="Type a comment">
+        <div class="box">
+            <div class="box-header with-border">
+                <h1 class="article-title">
+                    <div class="classes_box btn-box-tool">
+                        类别：
+                        {% for each_article_class_id,each_article_class_name in class_name_list.items %}
+                            <a href="/class/{{ each_article_class_id }}/"
+                               class="btn btn-info btn-sm article-class">{{ each_article_class_name }}</a>
+                        {% endfor %}
                     </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post clearfix">
-                        <div class="user-block">
-                            <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg"
-                                 alt="User Image">
-                            <span class="username">
-                          <a href="#">Sarah Ross</a>
-                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                        </span>
-                            <span class="description">Sent you a message - 3 days ago</span>
-                        </div>
-                        <!-- /.user-block -->
-                        <p>
-                            Lorem ipsum represents a long-held tradition for designers,
-                            typographers and the like. Some people hate it and argue for
-                            its demise, but others ignore the hate as they create awesome
-                            tools to help create filler text for everyone from bacon lovers
-                            to Charlie Sheen fans.
-                        </p>
-
-                        <form class="form-horizontal">
-                            <div class="form-group margin-bottom-none">
-                                <div class="col-sm-9">
-                                    <input class="form-control input-sm" placeholder="Response">
-                                </div>
-                                <div class="col-sm-3">
-                                    <button type="submit" class="btn btn-danger pull-right btn-block btn-sm">Send
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post">
-                        <div class="user-block">
-                            <img class="img-circle img-bordered-sm" src="../../dist/img/user6-128x128.jpg"
-                                 alt="User Image">
-                            <span class="username">
-                          <a href="#">Adam Jones</a>
-                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                        </span>
-                            <span class="description">Posted 5 photos - 5 days ago</span>
-                        </div>
-                        <!-- /.user-block -->
-                        <div class="row margin-bottom">
-                            <div class="col-sm-6">
-                                <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <img class="img-responsive" src="../../dist/img/photo2.png" alt="Photo">
-                                        <br>
-                                        <img class="img-responsive" src="../../dist/img/photo3.jpg" alt="Photo">
-                                    </div>
-                                    <!-- /.col -->
-                                    <div class="col-sm-6">
-                                        <img class="img-responsive" src="../../dist/img/photo4.jpg" alt="Photo">
-                                        <br>
-                                        <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
-                                    </div>
-                                    <!-- /.col -->
-                                </div>
-                                <!-- /.row -->
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
-
-                        <ul class="list-inline">
-                            <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a>
-                            </li>
-                            <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>
-                                Like</a>
-                            </li>
-                            <li class="pull-right">
-                                <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i>
-                                    Comments
-                                    (5)</a></li>
-                        </ul>
-
-                        <input class="form-control input-sm" type="text" placeholder="Type a comment">
-                    </div>
-                    <!-- /.post -->
+                    {{ this_article.Title }}
+                </h1>
+                <div class="pull-right btn-box-tool">
+                    <i class="fa fa-clock-o"></i>
+                    <span class="article-create-time">
+                        发表于：
+                        {{ this_article.CreateTime }}
+                    </span>
+                    <i class="fa fa-history"></i>
+                    <span class="article-update-time">
+                        最近更新：
+                        {{ this_article.UpdateTime }}
+                    </span>
+                    <i class="fa fa-eye"></i>
+                    <span class="article-page-view">浏览({{ this_article.PageView }})</span>
                 </div>
-                <!-- /.tab-pane -->
             </div>
-            <!-- /.tab-content -->
+            <div class="box-body">
+                <div id="article-md-view">
+                    <textarea>{{ this_article.Content }}</textarea>
+                </div>
+                <div class="btn-box-tool">
+                    标签：
+                    {% for each_article_label_name in label_name_list %}
+                        <span class="btn btn-success btn-xs article-label">{{ each_article_label_name }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="box-footer">
+                <div class="article-copy-right">
+                    作者：许树真<br>
+                    版权声明：转载时请以链接形式注明出处<br>
+                    通知作者：如有技术交流或发现文章内容有错误、不合理之处，望发送邮件到
+                    <a>shuzhen.xu@shuzhen66.com</a>
+                    ，十分感谢！
+                </div>
+                <div class="pull-right btn-box-tool">
+                    <i class="fa fa-clock-o"></i>
+                    <span class="article-create-time">
+                        发表于：
+                        {{ this_article.CreateTime }}
+                    </span>
+                    <i class="fa fa-history"></i>
+                    <span class="article-update-time">
+                        最近更新：
+                        {{ this_article.UpdateTime }}
+                    </span>
+                    <i class="fa fa-eye"></i>
+                    <span class="article-page-view">浏览({{ this_article.PageView }})</span>
+                </div>
+            </div>
         </div>
-        <!-- /.nav-tabs-custom -->
     </section>
 {% endblock %}

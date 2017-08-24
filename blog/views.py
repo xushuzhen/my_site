@@ -401,6 +401,23 @@ def blog_about_my_site(request):
     page_dir.update({
         'about_my_site_active': 'active',
     })
+    about_my_site = load_one_article(34, now_article_status=0)
+    page_dir.update(about_my_site)
+    for each_article in page_dir['top_article_list']:
+        if about_my_site['this_article']['ArticleID'] == each_article['ArticleID']:
+            page_dir.update({
+                'top_active': 'active',
+            })
+    class_id_list = about_my_site['this_article']['Class'].split(',')
+    label_id_list = about_my_site['this_article']['Label'].split(',')
+    class_name_list = get_article_class_list(class_id_list)
+    label_name_list = get_article_lable_list(label_id_list)
+    page_dir.update({
+        'class_id_list': class_id_list,
+        'class_name_list': class_name_list,
+        'label_id_list': label_id_list,
+        'label_name_list': label_name_list,
+    })
     return render(request, 'blog/blog_about_my_site.html', page_dir)
 
 
