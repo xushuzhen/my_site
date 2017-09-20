@@ -281,7 +281,7 @@ def check_cookie(func):
     def set_cookie(request, *args, **kwargs):
         cookie = request.COOKIES.get('xsz_blog_visitor')
         if not cookie:
-            response = HttpResponseRedirect('/')
+            response = HttpResponseRedirect(request.get_full_path())
             response.set_cookie('xsz_blog_visitor', uuid.uuid4(), 3600 * 24 * 365 * 10)
             return response
         return func(request, *args, **kwargs)
