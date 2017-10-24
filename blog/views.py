@@ -12,9 +12,11 @@ from django.http import HttpResponse
 from blog.models import Class
 from blog.models import Article
 from blog.models import Label
+import special_character
 
 # Create your views here.
 page_size = 10
+char_dir = special_character.char_dir
 
 
 def get_date_range():
@@ -523,7 +525,11 @@ def article_save(request):
         this_article.DescriptionSEO = article_data['DescriptionSEO']
         this_article.AuthorSEO = article_data['AuthorSEO']
         this_article.Title = article_data['Title']
-        this_article.Content = article_data['Content']
+        content = article_data['Content']
+        for sword in char_dir:
+            if sword in content:
+                content = content.replace(sword, char_dir[sword])
+        this_article.Content = content
         this_article.Class = article_data['Class']
         this_article.Label = article_data['Label']
         this_article.Status = article_data['Status']
