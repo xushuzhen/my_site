@@ -17,6 +17,7 @@ import special_character
 # Create your views here.
 page_size = 10
 char_dir = special_character.char_dir
+and_dir = special_character.and_dir
 
 
 def get_date_range():
@@ -529,6 +530,9 @@ def article_save(request):
         for sword in char_dir:
             if sword in content:
                 content = content.replace(sword, char_dir[sword])
+        for sword in and_dir:
+            if sword in content:
+                content = content.replace(sword, and_dir[sword])
         this_article.Content = content
         this_article.Class = article_data['Class']
         this_article.Label = article_data['Label']
