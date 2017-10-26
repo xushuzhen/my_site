@@ -183,18 +183,18 @@ def load_turn_page(page_type, now_page, type_parem=None):
         if words_num == 1:
             articles = Article.objects.filter(Status=1, Title__contains=key_words[0])
         elif words_num == 2:
-            articles = Article.objects.filter(Status=1, Title__contains=key_words[0])\
+            articles = Article.objects.filter(Status=1, Title__contains=key_words[0]) \
                 .filter(Title__contains=key_words[1])
         elif words_num == 3:
-            articles = Article.objects.filter(Status=1, Title__contains=key_words[0])\
+            articles = Article.objects.filter(Status=1, Title__contains=key_words[0]) \
                 .filter(Title__contains=key_words[1]).filter(Title__contains=key_words[2])
         elif words_num == 4:
-            articles = Article.objects.filter(Status=1, Title__contains=key_words[0])\
-                .filter(Title__contains=key_words[1]).filter(Title__contains=key_words[2])\
+            articles = Article.objects.filter(Status=1, Title__contains=key_words[0]) \
+                .filter(Title__contains=key_words[1]).filter(Title__contains=key_words[2]) \
                 .filter(Title__contains=key_words[3])
         elif words_num >= 5:
-            articles = Article.objects.filter(Status=1, Title__contains=key_words[0])\
-                .filter(Title__contains=key_words[1]).filter(Title__contains=key_words[2])\
+            articles = Article.objects.filter(Status=1, Title__contains=key_words[0]) \
+                .filter(Title__contains=key_words[1]).filter(Title__contains=key_words[2]) \
                 .filter(Title__contains=key_words[3]).filter(Title__contains=key_words[4])
         article_count = articles.count()
         content_list = articles.order_by('-CreateTime')[
@@ -545,3 +545,8 @@ def article_save(request):
         return HttpResponse(json.dumps({'code': '200', 'msg': new_article_id}), content_type='application/json')
     except:
         return HttpResponse(json.dumps({'code': '500', 'msg': '写入错误！！！'}), content_type='application/json')
+
+
+# def check_file(request):
+#     return HttpResponse(
+#         'pmrgi33nmfuw4ir2ej4hk43iov5gqzlofzrw4irmejtxk2leei5cezbxgfrwimbugizwemdfgq3gmyryme3tey3gmi2gczrtmu2dqzbxeiwce5djnvsvgylwmurdumjvga4dqmrthezdinztg56q')
